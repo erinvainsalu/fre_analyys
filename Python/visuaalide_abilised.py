@@ -141,7 +141,7 @@ def loo_risttabel(df, df_koodid, tunnus_rida, tunnus_veerg, normalize=False):
 # Loo kahe tunnuse risttabel, kus üks tunnustest on mitmikvalikuga
 
 # Loo vertikaalne tulpdiagramm
-def loo_tulpdiagramm(df, title, style_config, percent=True, sort=False):
+def loo_tulpdiagramm(df, title, style_config, hue=None, percent=True, sort=False):
     
     # Vajadusel sorteeri andmestik
     if sort:
@@ -157,6 +157,7 @@ def loo_tulpdiagramm(df, title, style_config, percent=True, sort=False):
         data=df,
         x='vastus_lyhike',
         y='protsent' if percent else 'vastuste_arv', # kasutaja kas suhtarve või absoluutseid väärtuseid
+        hue=hue,
         color=style_config['PRIMARY_COLOR'],
         ax=ax
     )
@@ -412,226 +413,63 @@ def loo_hor_stacked_tulpdiagramm(df, title, style_config, normalize=True, sort=T
 
     return fig, ax
 
-def loo_diverging_stacked_tulpdiagramm(
-    data, 
-    pealkiri, 
-    negatiivne_veerud=None,
-    neutraalne_veerg=None, 
-    positiivne_veerud=None,
-    negatiivne_varvid=None,
-    neutraalne_varv='#ffe5b4',
-    positiivne_varvid=None,
-    naita_protsente=True,
-    figsize=(12, 8),
-    xlabel='Vastajate osakaal (%)'
-):
+def loo_heatmap(df, title, cmap="YlGn", fmt='.0f', normalize=None, figsize=(7, 5)):
     """
-    Loob diverging stacked bar diagrammi ordinaalse Likert-skaala andmete jaoks.
-    Neutraalne väärtus on keskele jaotatud (pool paremale, pool vasakule).
-    
-    Parameetrid:
-    -----------
-    data : pd.DataFrame
-        Andmed kus esimene veerg on kategooriad, ülejäänud veerud on vastuste arvud
-    pealkiri : str
-        Diagrammi pealkiri
-    negatiivne_veerud : list
-        Negatiivsete vastuste veergude nimed (väiksemast suuremani)
-        Näide: ['Probleem puudub', 'Väike probleem']
-    neutraalne_veerg : str
-        Neutraalse vastuse veeru nimi
-        Näide: 'Keskmine'
-    positiivne_veerud : list
-        Positiivsete vastuste veergude nimed (väiksemast suuremani)
-        Näide: ['Pigem tõsine', 'Väga tõsine']
-    negatiivne_varvid : list, optional
-        Värvid negatiivsetele vastustele (heledamast tumedamani)
-    neutraalne_varv : str, optional
-        Värv neutraalsele vastusele (default: beež)
-    positiivne_varvid : list, optional
-        Värvid positiivsetele vastustele (heledamast tumedamani)
-    naita_protsente : bool, optional
-        Kas näidata protsentide numbreid (default: True)
-    figsize : tuple, optional
-        Joonise suurus (default: (12, 8))
-    xlabel : str, optional
-        X-telje nimetus
-        
-    Tagastab:
-    --------
-    fig, ax : matplotlib figure ja axes objektid
-    
-    Näide:
-    ------
-    >>> fig, ax = loo_diverging_stacked_tulpdiagramm(
-    ...     probleem_vanus,
-    ...     'Tekstiilijäätmete probleemi tõsidus vanusegruppide lõikes',
-    ...     negatiivne_veerud=['Probleem puudub', 'Väike probleem'],
-    ...     neutraalne_veerg='Keskmine',
-    ...     positiivne_veerud=['Pigem tõsine', 'Väga tõsine']
-    ... )
+    Plot a heatmap from a pandas DataFrame.
+
+    Parameters:
+        df (pandas.DataFrame): Input data
+        title (str): Plot title
+        cmap (str): Matplotlib colormap
+        annotate (bool): Show values inside cells
+        fmt (str): Annotation format (e.g. "d", ".1f")
+        figsize (tuple): Figure size
+        cbar (bool): Show colorbar
     """
-    
-    # Vaikimisi värvid
-    if negatiivne_varvid is None:
-        # Heledast tumedani: hall/sinine negatiivne pool
-        negatiivne_varvid = ['#d1d3d4', '#92a8b8']
-    
-    if positiivne_varvid is None:
-        # Heledast tumedani: oranž/punane positiivne pool
-        positiivne_varvid = ['#f4a582', '#ca0020']
-    
-    # Kontrolli, et on piisavalt värve
-    if negatiivne_veerud and len(negatiivne_varvid) < len(negatiivne_veerud):
-        raise ValueError(f"Vajab {len(negatiivne_veerud)} negatiivset värvi, anti {len(negatiivne_varvid)}")
-    
-    if positiivne_veerud and len(positiivne_varvid) < len(positiivne_veerud):
-        raise ValueError(f"Vajab {len(positiivne_veerud)} positiivset värvi, anti {len(positiivne_varvid)}")
-    
-    # Arvuta protsendid
-    df_pct = data.copy()
-    
-    # Esimene veerg on kategooriad, ülejäänud on vastused
-    vastuse_veerud = [col for col in data.columns if col != data.columns[0]]
-    
-    # Arvuta iga rea summa
-    df_pct['_summa'] = data[vastuse_veerud].sum(axis=1)
-    
-    # Arvuta protsendid
-    for col in vastuse_veerud:
-        df_pct[col] = (data[col] / df_pct['_summa']) * 100
-    
-    # Loo joonis
+
+    values = df.values
+
+    # --- Normalization ---
+    if normalize == "row":
+        values = values / values.sum(axis=1, keepdims=True)
+    elif normalize == "col":
+        values = values / values.sum(axis=0, keepdims=True)
+    elif normalize == "all":
+        values = values / values.sum()
+
+    rows, cols = df.index, df.columns
+
     fig, ax = plt.subplots(figsize=figsize)
-    
-    # Kategooriad (y-telg)
-    kategooriad = df_pct[df_pct.columns[0]].values
-    y_pos = np.arange(len(kategooriad))
-    
-    # ===== VASAKPOOLNE KÜLG (NEGATIIVNE) =====
-    vasak_kumulatiivne = np.zeros(len(df_pct))
-    
-    # Lisa negatiivne pool (pööratud järjekorras, et kõige tugevam oleks kõige väljaspool)
-    if negatiivne_veerud:
-        for i, veerg in enumerate(reversed(negatiivne_veerud)):
-            vaartused = -df_pct[veerg].values
-            varv_idx = len(negatiivne_veerud) - 1 - i
-            ax.barh(y_pos, vaartused, left=vasak_kumulatiivne, 
-                    color=negatiivne_varvid[varv_idx], 
-                    edgecolor='white', linewidth=0.5,
-                    label=veerg)
-            vasak_kumulatiivne += vaartused
-    
-    # Lisa pool neutraalsest vasakule
-    if neutraalne_veerg:
-        neutraalne_vasak = -df_pct[neutraalne_veerg].values / 2
-        ax.barh(y_pos, neutraalne_vasak, left=vasak_kumulatiivne, 
-                color=neutraalne_varv, 
-                edgecolor='white', linewidth=0.5,
-                label=neutraalne_veerg)
-        vasak_kumulatiivne += neutraalne_vasak
-    
-    # ===== PAREMPOOLNE KÜLG (POSITIIVNE) =====
-    parem_kumulatiivne = np.zeros(len(df_pct))
-    
-    # Lisa pool neutraalsest paremale
-    if neutraalne_veerg:
-        neutraalne_parem = df_pct[neutraalne_veerg].values / 2
-        ax.barh(y_pos, neutraalne_parem, left=parem_kumulatiivne, 
-                color=neutraalne_varv,
-                edgecolor='white', linewidth=0.5)
-        parem_kumulatiivne += neutraalne_parem
-    
-    # Lisa positiivne pool
-    if positiivne_veerud:
-        for i, veerg in enumerate(positiivne_veerud):
-            vaartused = df_pct[veerg].values
-            ax.barh(y_pos, vaartused, left=parem_kumulatiivne, 
-                    color=positiivne_varvid[i], 
-                    edgecolor='white', linewidth=0.5,
-                    label=veerg)
-            parem_kumulatiivne += vaartused
-    
-    # ===== VORMINDUS =====
-    
-    # Y-telg (kategooriad)
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels(kategooriad, fontsize=11)
-    
-    # X-telg
-    ax.set_xlabel(xlabel, fontsize=12, fontweight='bold')
-    
-    # Pealkiri
-    ax.set_title(pealkiri, fontsize=14, fontweight='bold', pad=20)
-    
-    # Nulljoon
-    ax.axvline(0, color='black', linewidth=1.2, zorder=10)
-    
-    # Määra sümmeetriline X-telg
-    max_vasak = abs(vasak_kumulatiivne.min())
-    max_parem = parem_kumulatiivne.max()
-    max_abs = max(max_vasak, max_parem)
-    
-    ax.set_xlim(-max_abs * 1.05, max_abs * 1.05)
-    
-    # Muuda X-telje sildid positiivseteks (absoluutväärtused)
-    xticks = ax.get_xticks()
-    ax.set_xticks(xticks)
-    ax.set_xticklabels([f'{abs(x):.0f}' for x in xticks], fontsize=10)
-    
-    # Legend (ülemises osas, väljaspool graafikut)
-    handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles, labels, 
-              loc='upper center', 
-              bbox_to_anchor=(0.5, -0.05), 
-              ncol=min(5, len(handles)), 
-              frameon=False,
-              fontsize=10)
-    
-    # Grid
-    ax.grid(axis='x', alpha=0.3, linestyle='--', linewidth=0.5)
-    ax.set_axisbelow(True)
-    
-    # ===== LISA PROTSENDID TULPADELE =====
-    if naita_protsente:
-        for i in range(len(kategooriad)):
-            # Vasak pool (negatiivne) kokku
-            vasak_summa = 0
-            if negatiivne_veerud:
-                vasak_summa = sum(df_pct.iloc[i][veerg] for veerg in negatiivne_veerud)
-            
-            # Parem pool (positiivne) kokku
-            parem_summa = 0
-            if positiivne_veerud:
-                parem_summa = sum(df_pct.iloc[i][veerg] for veerg in positiivne_veerud)
-            
-            # Neutraalne
-            neutraalne_summa = 0
-            if neutraalne_veerg:
-                neutraalne_summa = df_pct.iloc[i][neutraalne_veerg]
-            
-            # Näita vasakpoolset summat
-            if vasak_summa > 3:  # Näita ainult kui piisavalt suur
-                ax.text(-vasak_summa/2 - neutraalne_summa/4, i, 
-                       f'{vasak_summa:.0f}%',
-                       ha='center', va='center', 
-                       fontsize=9, fontweight='bold', 
-                       color='#333')
-            
-            # Näita neutraalset
-            if neutraalne_summa > 3:
-                ax.text(0, i, f'{neutraalne_summa:.0f}%',
-                       ha='center', va='center',
-                       fontsize=9, fontweight='bold',
-                       color='#333')
-            
-            # Näita parempoolset summat
-            if parem_summa > 3:
-                ax.text(parem_summa/2 + neutraalne_summa/4, i, 
-                       f'{parem_summa:.0f}%',
-                       ha='center', va='center', 
-                       fontsize=9, fontweight='bold', 
-                       color='white')
+
+    # Heatmap
+    im = ax.imshow(values, cmap=cmap, aspect="auto")
+
+    # Colorbar
+    plt.colorbar(im, ax=ax)
+
+    # Ticks & labels
+    ax.set_xticks(np.arange(len(cols)))
+    ax.set_yticks(np.arange(len(rows)))
+    ax.set_xticklabels(cols, rotation=45, ha="right")
+    ax.set_yticklabels(rows)
+
+    # Annotations
+    norm = im.norm  # normalization used internally by imshow
+
+    for i in range(values.shape[0]):
+        for j in range(values.shape[1]):
+            val = values[i, j]
+
+            # Normalize value to [0,1] to decide text color
+            normalized_val = norm(val)
+            text_color = "white" if normalized_val > 0.5 else "black"
+
+            ax.text(j, i, format(val, fmt),
+                    ha="center", va="center",
+                    color=text_color)
+
+    # Titles and layout
+    ax.set_title(title)
     
     plt.tight_layout()
     

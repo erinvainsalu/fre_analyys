@@ -13,3 +13,6 @@ from Python.visuaalide_abilised import leia_sildi_mapping
 from Python.visuaalide_abilised import sagedustabel
 
 st.title('Tarbijate hoiakud tekstiilide liigiti kogumisel rõivastest ja kodutekstiilidest loobumisel')
+
+st.write('Aastal 2025 jõustunud seadus näeb ette tekstiilijäätmete liigiti kogumise olmeprügist eraldi, ' \
+'ehk tarbijal ei ole enam seaduse järgi lubatud visata tekstiilijäätmeid, näiteks kulunud ja katkiseid rõivaid, olmeprügi hulka. ')

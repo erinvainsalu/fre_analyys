@@ -14,10 +14,6 @@ from Python.visuaalide_abilised import maara_raporti_stiil
 from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel
 from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm
 
-st.title('Vastajate demograafilised andmed')
-
-st.write(os.getcwd())
-
 # Määra graafikute stiil
 style = maara_raporti_stiil()
 
@@ -30,6 +26,8 @@ koodid = pd.read_csv('data/vastuste_koodid.csv')
 # Asenda väheste vastajate arvuga maakonnad valikuga muu
 data_puhastatud = data.copy()
 data_puhastatud['K5_elukoht'] = data['K5_elukoht'].replace([2, 3, 5, 6, 7, 8, 10, 11, 13, 15], 16)
+
+st.title('Vastajate demograafilised andmed')
 
 ###################################################
 # VANUS                                           #
@@ -81,7 +79,7 @@ st.write('**Vastajate jaotus soo lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv soo alusel
-sugu_sagedus = sagedustabel(data, koodid, 'K4_sugu')
+sugu_sagedus = sagedustabel(data, koodid, 'K4_sugu').sort_values(by='protsent', ascending=False)
 
 # Loo tulpdiagramm
 fig, ax = loo_tulpdiagramm(
@@ -117,7 +115,7 @@ st.write('**Vastajate jaotus maakonna lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv elukoha alusel
-elukoht_sagedus = sagedustabel(data, koodid, 'K5_elukoht')
+elukoht_sagedus = sagedustabel(data, koodid, 'K5_elukoht').sort_values(by='protsent', ascending=False)
 
 # Loo tulpdiagramm
 fig, ax = loo_hor_tulpdiagramm(
@@ -174,7 +172,7 @@ st.write('**Vastajate jaotus koduse keele lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv keele alusel
-keel_sagedus = sagedustabel(data, koodid, 'K6_keel')
+keel_sagedus = sagedustabel(data, koodid, 'K6_keel').sort_values(by='protsent', ascending=False)
 
 fig, ax = loo_tulpdiagramm(
     keel_sagedus,

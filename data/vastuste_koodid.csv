@@ -1,11 +1,11 @@
 kysimus,kood,vastus,vastus_lyhike
 K2_kontroll,1,Jah,Jah
 K2_kontroll,2,Ei,Ei
-K3_vanus,1,Alaealine (17 või noorem),<17
+K3_vanus,1,Alaealine (17 või noorem),<18
 K3_vanus,2,18-29,18-29
 K3_vanus,3,30-49,30-49
 K3_vanus,4,50-64,50-64
-K3_vanus,5,65 või vanem,65>
+K3_vanus,5,65 või vanem,64>
 K4_sugu,1,Mees,Mees
 K4_sugu,2,Naine,Naine
 K4_sugu,3,Ei soovi määratleda,Määratlemata
@@ -30,9 +30,9 @@ K6_keel,2,Inglise keel,Inglise
 K6_keel,3,Vene keel,Vene
 K6_keel,4,Muu,Muu
 K7_sorteerimiskaitumine,1,Ei sorteeri,Ei sorteeri
-K7_sorteerimiskaitumine,2,"Jah, maksimaalselt kahes kategoorias",Kuni 2 kategooriat
+K7_sorteerimiskaitumine,2,"Jah, maksimaalselt kahes kategoorias",<3 kategooriat
 K7_sorteerimiskaitumine,3,"Jah, 3-5 jäätmekategoorias",3-5 kategooriat
-K7_sorteerimiskaitumine,4,"Jah, üle 6 jäätmekategoorias",6+ kategooriat
+K7_sorteerimiskaitumine,4,"Jah, üle 6 jäätmekategoorias",5> kategooriat
 K7_sorteerimiskaitumine,5,"Ei, sest elan täielikult null-kulu eluviisi",Null-kulu eluviis
 K7_sorteerimiskaitumine,6,Muu,Muu
 K8_teadmiste_hinnang,1,Väga madal või olematu tarbijateadlikkus,Väga madal
@@ -47,7 +47,7 @@ K9_probleemi_tosidus,4,4 - puudu,Pigem tõsine
 K9_probleemi_tosidus,5,"Äärmiselt suur probleem, millel on tõsised tagajärjed",Väga tõsine
 K11_teadlikkus,1,"Jah, olen teadlik","Jah, olen teadlik"
 K11_teadlikkus,2,"Olen kuulnud, kuid täpsemalt ei tea","Olen kuulnud, täpsemalt ei tea"
-K11_teadlikkus,3,"Olen teadlik, aga see on valitsuse ja KOV'ide, mitte tarbijate mure","Olen teadlik, ei pea tarbijate mureks"
+K11_teadlikkus,3,"Olen teadlik, aga see on valitsuse ja KOV'ide, mitte tarbijate mure","Olen teadlik, ei pea tarbija mureks"
 K11_teadlikkus,4,Ei ole teadlik,Ei ole teadlik
 K13_kommunikatsiooni_selgus,1,Väga selge,Väga selge
 K13_kommunikatsiooni_selgus,2,"Selge, kuid mittetäielik","Selge, kuid mittetäielik"
