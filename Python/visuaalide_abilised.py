@@ -430,60 +430,32 @@ def loo_hor_stacked_tulpdiagramm(df, title, style_config, normalize=True, sort=T
 
     return fig, ax
 
-def loo_heatmap(df, title, cmap="YlGn", fmt='.0f', normalize=None):
-    """
-    Plot a heatmap from a pandas DataFrame.
-
-    Parameters:
-        df (pandas.DataFrame): Input data
-        title (str): Plot title
-        cmap (str): Matplotlib colormap
-        fmt (str): Annotation format (e.g. "d", ".1f")
-    """
-
-    values = df.values
-
-    # --- Normalization ---
-    if normalize == "row":
-        values = values / values.sum(axis=1, keepdims=True)
-    elif normalize == "col":
-        values = values / values.sum(axis=0, keepdims=True)
-    elif normalize == "all":
-        values = values / values.sum()
-
-    rows, cols = df.index, df.columns
-
+# Loo heatmap
+def loo_heatmap(df, title, cmap='coolwarm_r', fmt='.0f'):
     fig, ax = create_fig()
+    
+    # Loo diagramm
+    sns.heatmap(
+        data=df,
+        cmap=cmap,
+        linewidths=1,
+        #linecolor='gray',
+        annot=True
+        #square= True
+    )
 
-    # Heatmap
-    im = ax.imshow(values, cmap=cmap, aspect="auto")
+    # Lisa pealkiri
+    ax.set_title(title, weight='bold', loc='left', pad=15)
 
-    # Colorbar
-    plt.colorbar(im, ax=ax)
+    plt.xticks(rotation=45)
+    ax.set(xlabel=None)
+    ax.set(ylabel=None)
 
-    # Ticks & labels
-    ax.set_xticks(np.arange(len(cols)))
-    ax.set_yticks(np.arange(len(rows)))
-    ax.set_xticklabels(cols, rotation=45, ha="right")
-    ax.set_yticklabels(rows)
+    # Eemalda telgede nimed
+    #ax.set(xlabel=None, ylabel=None)
 
-    # Annotations
-    norm = im.norm  # normalization used internally by imshow
-
-    for i in range(values.shape[0]):
-        for j in range(values.shape[1]):
-            val = values[i, j]
-
-            # Normalize value to [0,1] to decide text color
-            normalized_val = norm(val)
-            text_color = "white" if normalized_val > 0.5 else "black"
-
-            ax.text(j, i, format(val, fmt),
-                    ha="center", va="center",
-                    color=text_color)
-
-    # Titles and layout
-    ax.set_title(title)
+    # Kuva minimalistlik grid
+    #ax.grid(axis="x", visible=False)
     
     plt.tight_layout()
     

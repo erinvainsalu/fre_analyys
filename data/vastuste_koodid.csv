@@ -1,174 +1,174 @@
-kysimus,kood,vastus,vastus_lyhike
-K2_kontroll,1,Jah,Jah
-K2_kontroll,2,Ei,Ei
-K3_vanus,1,Alaealine (17 või noorem),<18
-K3_vanus,2,18-29,18-29
-K3_vanus,3,30-49,30-49
-K3_vanus,4,50-64,50-64
-K3_vanus,5,65 või vanem,64>
-K4_sugu,1,Mees,Mees
-K4_sugu,2,Naine,Naine
-K4_sugu,3,Ei soovi määratleda,Määratlemata
-K5_elukoht,1,Harju maakond,Harju
-K5_elukoht,2,Hiiu maakond,Hiiu
-K5_elukoht,3,Ida-Viru maakond,Ida-Viru
-K5_elukoht,4,Järva maakond,Järva
-K5_elukoht,5,Jõgeva maakond,Jõgeva
-K5_elukoht,6,Lääne maakond,Lääne
-K5_elukoht,7,Lääne-Viru maakond,Lääne-Viru
-K5_elukoht,8,Põlva maakond,Põlva
-K5_elukoht,9,Pärnu maakond,Pärnu
-K5_elukoht,10,Rapla maakond,Rapla
-K5_elukoht,11,Saare maakond,Saare
-K5_elukoht,12,Tartu maakond,Tartu
-K5_elukoht,13,Valga maakond,Valga
-K5_elukoht,14,Viljandi maakond,Viljandi
-K5_elukoht,15,Võru maakond,Võru
-K5_elukoht,16,Muu,Muu
-K6_keel,1,Eesti keel,Eesti
-K6_keel,2,Inglise keel,Inglise
-K6_keel,3,Vene keel,Vene
-K6_keel,4,Muu,Muu
-K7_sorteerimiskaitumine,1,Ei sorteeri,Ei sorteeri
-K7_sorteerimiskaitumine,2,"Jah, maksimaalselt kahes kategoorias",<3 kategooriat
-K7_sorteerimiskaitumine,3,"Jah, 3-5 jäätmekategoorias",3-5 kategooriat
-K7_sorteerimiskaitumine,4,"Jah, üle 6 jäätmekategoorias",5> kategooriat
-K7_sorteerimiskaitumine,5,"Ei, sest elan täielikult null-kulu eluviisi",Null-kulu eluviis
-K7_sorteerimiskaitumine,6,Muu,Muu
-K8_teadmiste_hinnang,1,Väga madal või olematu tarbijateadlikkus,Väga madal
-K8_teadmiste_hinnang,2,2 - puudu,Pigem madal
-K8_teadmiste_hinnang,3,3 - puudu,Keskmine
-K8_teadmiste_hinnang,4,4 - puudu,Pigem hea
-K8_teadmiste_hinnang,5,Kõik minu valikud on teistele eeskujuks,Väga hea
-K9_probleemi_tosidus,1,Ei näe seda sugugi probleemina,Probleem puudub
-K9_probleemi_tosidus,2,2 - puudu,Väike probleem
-K9_probleemi_tosidus,3,3 - puudu,Keskmine
-K9_probleemi_tosidus,4,4 - puudu,Pigem tõsine
-K9_probleemi_tosidus,5,"Äärmiselt suur probleem, millel on tõsised tagajärjed",Väga tõsine
-K11_teadlikkus,1,"Jah, olen teadlik",Olen teadlik
-K11_teadlikkus,2,"Olen kuulnud, kuid täpsemalt ei tea",Olen kuulnud
-K11_teadlikkus,3,"Olen teadlik, aga see on valitsuse ja KOV'ide, mitte tarbijate mure",Olen teadlik (ei ole tarbija mure)
-K11_teadlikkus,4,Ei ole teadlik,Ei ole teadlik
-K13_kommunikatsiooni_selgus,1,Väga selge,Väga selge
-K13_kommunikatsiooni_selgus,2,"Selge, kuid mittetäielik","Selge, kuid mittetäielik"
-K13_kommunikatsiooni_selgus,3,Arusaamatu,Arusaamatu
-K13_kommunikatsiooni_selgus,4,Puudulik,Puudulik
-K14_tekstiilide_kogus,1,Kuni 1kg,<1kg
-K14_tekstiilide_kogus,2,Kuni 5kg,Kuni 5kg
-K14_tekstiilide_kogus,3,Kuni 10kg,Kuni 10kg
-K14_tekstiilide_kogus,4,Kuni 15kg,Kuni 15kg
-K14_tekstiilide_kogus,5,Üle 15kg,>15kg
-K14_tekstiilide_kogus,6,Ei oska öelda,Ei oska öelda
-K14_tekstiilide_kogus,7,Muu,Muu
-K15_mittevajalikud_tekstiilid,1,Müün teisel ringil (veebis),Müün veebis
-K15_mittevajalikud_tekstiilid,2,Müün teisel ringil (füüsilises poes),Müün füüsilises poes
-K15_mittevajalikud_tekstiilid,3,Annan perele või tuttavatele,Annan perele/tuttavatele
-K15_mittevajalikud_tekstiilid,4,Viin avalikesse kogumiskastidesse,Viin kogumiskastidesse
-K15_mittevajalikud_tekstiilid,5,Viskan olmejäätmete hulka,Viskan olmejäätmetesse
-K15_mittevajalikud_tekstiilid,6,Tuunin ja teen ise ümber,Teen ise ümber
-K15_mittevajalikud_tekstiilid,7,Muu,Muu
-K17_valmisolek_parandamiseks,1,Ei paranda üldse,
-K17_valmisolek_parandamiseks,2,2 - puudu,
-K17_valmisolek_parandamiseks,3,3 - puudu,
-K17_valmisolek_parandamiseks,4,4 - puudu,
-K17_valmisolek_parandamiseks,5,Parandan maksimaalselt,
-K19_loobumise_pohjused,1,Trend/mood on aegunud,Pole moes
-K19_loobumise_pohjused,2,Katkised või määrdunud,Katkised/määrdunud
-K19_loobumise_pohjused,3,Kulunud või ilme kaotanud,Kulunud/ilme kaotanud
-K19_loobumise_pohjused,4,Moraalne väsimus rõivastest (soov värskendada garderoobi),Garderoobiuuendus
-K19_loobumise_pohjused,5,Vale soetatud suurus,Vale soetatud suurus
-K19_loobumise_pohjused,6,Kehadimensioonide muutus ajas,Keha ajas muutunud
-K19_loobumise_pohjused,7,Ruumipuudus kapis/kodus,Ruumipuudus
-K19_loobumise_pohjused,8,Kolimine,Kolimine
-K19_loobumise_pohjused,9,Muu,Muu
-K21_loobumise_lihtsus,1,Tohutult keeruline,
-K21_loobumise_lihtsus,2,2 - puudu,
-K21_loobumise_lihtsus,3,3 - puudu,
-K21_loobumise_lihtsus,4,4 - puudu,
-K21_loobumise_lihtsus,5,Väga lihtne ja mugav,
-K22_peamised_valjakutsed,1,Ajapuudus,
-K22_peamised_valjakutsed,2,Ebakindlus hinnata tekstiilide seisukorda pädevalt,
-K22_peamised_valjakutsed,3,Sobivate kogumiskohtade puudumine mugavas asukohas,
-K22_peamised_valjakutsed,4,Tekstiilide transport kogumispunktidesse on keeruline,
-K22_peamised_valjakutsed,5,Moraalne side rõivaste ja tekstiilidega muudab nende kasutuskõlbmatuks nimetamise keeruliseks,
-K22_peamised_valjakutsed,6,Keerukad sorteerimisjuhendid,
-K22_peamised_valjakutsed,7,Muu,
-K23_kasutuskolbmatud_tekstiilid,1,Rõivakonteineritesse,Rõivakonteiner
-K23_kasutuskolbmatud_tekstiilid,2,Panen segaolmejäätme prügikonteinerisse,Segaolmejäätmete konteiner
-K23_kasutuskolbmatud_tekstiilid,3,Viin eraldi jäätmejaama,Jäätmejaam
-K23_kasutuskolbmatud_tekstiilid,4,Põletan kodus,Põletamine (kodus)
-K23_kasutuskolbmatud_tekstiilid,5,Matan,Matmine
-K23_kasutuskolbmatud_tekstiilid,6,"Ei tea, sest mina ei vastuta selle tegevuse eest enda leibkonnas",Ei tea (kuna ei vastuta)
-K23_kasutuskolbmatud_tekstiilid,7,Muu,Muu
-K25_loobumisel_oluline,1,Vastuvõtva organisatsiooni läbipaistvus,
-K25_loobumisel_oluline,2,Rõivastest loobumisel saadav isiklik kasu (nt sooduskupong),
-K25_loobumisel_oluline,3,Heategevuslik aspekt,
-K25_loobumisel_oluline,4,Rõivale on tagatud uus elu,
-K25_loobumisel_oluline,5,Ese läheb re-disainimisele,
-K25_loobumisel_oluline,6,Mind ei huvita eseme edasine saatus,
-K25_loobumisel_oluline,7,Muu,
-K26_korduskasutuseks_sobimatud_tekstiilid,1,Jah,Jah
-K26_korduskasutuseks_sobimatud_tekstiilid,2,Olen rõiva seisukorras kahelnud ja seetõttu viinud siiski konteinerisse,"Olen rõiva seisukorras kahelnud, seetõttu viinud konteinerisse"
-K26_korduskasutuseks_sobimatud_tekstiilid,3,Ei,Ei
-K28_riikliku_juhise_selgus,1,Täiesti arusaamatu,Täiesti arusaamatu
-K28_riikliku_juhise_selgus,2,Osaliselt arusaamatu,Osaliselt arusaamatu
-K28_riikliku_juhise_selgus,3,Osaliselt arusaadav,Osaliselt arusaadav
-K28_riikliku_juhise_selgus,4,Täiesti arusaadav,Täiesti arusaadav
-K28_riikliku_juhise_selgus,5,Ei ole sellega kursis/ei tea,Ei ole kursis/ei tea
-K29_sobiv_kogumisviis,1,Püsivad kogumispunktid linnas,
-K29_sobiv_kogumisviis,2,Püsivad kogumispunktid kohalikus jäätmejaamas,
-K29_sobiv_kogumisviis,3,Kogumispunktid kaubanduspindadel,
-K29_sobiv_kogumisviis,4,"Mobiilsed kogumisautod, mis käivad graafiku alusel ukselt-uksele tekstiile kogumas",
-K29_sobiv_kogumisviis,5,Kogumisnädalad kodukandis (nt kord kvartalis),
-K29_sobiv_kogumisviis,6,Muu,
-K30_valmisolek_kategoriseerimiseks,1,"Jah, see oleks mulle sobiv",
-K30_valmisolek_kategoriseerimiseks,2,"Jah, kui sorteerimisjuhis on selge ja konkreetne",
-K30_valmisolek_kategoriseerimiseks,3,"Jah, kui kogumispunktid on mugavas asukohas ja mulle lähedal",
-K30_valmisolek_kategoriseerimiseks,4,"Ei, eelistaksin üht konteinerit kõigele (one fits for all)",
-K30_valmisolek_kategoriseerimiseks,5,Pole kindel,
-K30_valmisolek_kategoriseerimiseks,6,Muu,
-K32_teabe_allikad,1,Raadio,Raadio
-K32_teabe_allikad,2,Televisioon,Televisioon
-K32_teabe_allikad,3,"Ajalehed, ajakirjad","Ajalehed, -kirjad"
-K32_teabe_allikad,4,Artiklid veebiväljaannetes,Veebiväljaanded
-K32_teabe_allikad,5,Raamatud,Raamatud
-K32_teabe_allikad,6,Sotsiaalmeedia,Sotsiaalmeedia
-K32_teabe_allikad,7,Teaduslikud uuringud ja teadusartiklid,"Uuringud, teadusartiklid"
-K32_teabe_allikad,8,"Sõpradelt, tuttavatelt",Sõbrad/tuttavad
-K32_teabe_allikad,9,"See teema ei ole mind kunagi paelunud, ei huvitu sellest infost teadlikult",Ei huvitu sellest infost
-K32_teabe_allikad,10,Muu,Muu
-K33_julgustavad_tegurid,1,Kogumispunktide lähedus elukohale ja ligipääsetavus,
-K33_julgustavad_tegurid,2,Selged juhised,
-K33_julgustavad_tegurid,3,Võimalus teha head,
-K33_julgustavad_tegurid,4,Teave keskkonnamõjude kohta,
-K33_julgustavad_tegurid,5,Soodustused/allahindlused kauplustes,
-K33_julgustavad_tegurid,6,Ukselt-uksele kogumine tekstiilitakso meetodil (kokkulepitud ajal tehakse pealekorje),
-K33_julgustavad_tegurid,7,Muu,
-K36_valmisolek_lisakysimusteks,1,Jah,
-K36_valmisolek_lisakysimusteks,2,Ei,
-K37_rahulolu_garderoobiga,1,Ei ole üldse rahul,Väga rahuolematu
-K37_rahulolu_garderoobiga,2,2 - puudu,Kergelt rahuolematu
-K37_rahulolu_garderoobiga,3,3 - puudu,Osaliselt rahul
-K37_rahulolu_garderoobiga,4,4 - puudu,Üsna rahul
-K37_rahulolu_garderoobiga,5,Väga rahul,Väga rahul
-K38_kandmise_kestus,1,"Mu garderoobis on pikaealised riided, mida hooldan ja kannan aastaid",
-K38_kandmise_kestus,2,"Peamiselt kannan riideid aastaid, aga üksikutest esemetest loobun kiiremini (näiteks erilisemad peoriided või kiiresti kuluvad esemed)",
-K38_kandmise_kestus,3,"Nii ja naa, mulle meeldib iga aasta oma garderoobi natuke värskendada",
-K38_kandmise_kestus,4,Käin kaasas hooajaliste moodidega ning garderoob vahetub regulaarselt,
-K38_kandmise_kestus,5,Muu,
-K40_ostmissagedus,1,Igapäevaselt,Igapäevaselt
-K40_ostmissagedus,2,Kord nädalas,Kord nädalas
-K40_ostmissagedus,3,Kord kuus,Kord kuus
-K40_ostmissagedus,4,Kord kvartalis,Kord kvartalis
-K40_ostmissagedus,5,Kord aastas,Kord aastas
-K40_ostmissagedus,6,Harvem,Harvem
-K41_ultrakiirmoe_ostmine,1,Ei ole üldse ostnud,Mitte kunagi
-K41_ultrakiirmoe_ostmine,2,2 - puudu,Harva
-K41_ultrakiirmoe_ostmine,3,3 - puudu,Mõnikord
-K41_ultrakiirmoe_ostmine,4,4 - puudu,Sageli
-K41_ultrakiirmoe_ostmine,5,Ostan valdavalt oma riided neist poodidest,Väga sageli
-K43_roivaste_tellimine_proovimiseks,1,Ei ole seda kordagi teinud,Mitte kunagi
-K43_roivaste_tellimine_proovimiseks,2,2 - puudu,Harva
-K43_roivaste_tellimine_proovimiseks,3,3 - puudu,Mõnikord
-K43_roivaste_tellimine_proovimiseks,4,4 - puudu,Sageli
-K43_roivaste_tellimine_proovimiseks,5,Teen seda väga sageli,Väga sageli
+kysimus,kood,vastus,vastus_lyhike,
+K2_kontroll,1,Jah,Jah,
+K2_kontroll,2,Ei,Ei,
+K3_vanus,1,Alaealine (17 või noorem),<18,
+K3_vanus,2,18-29,18-29,
+K3_vanus,3,30-49,30-49,
+K3_vanus,4,50-64,50-64,
+K3_vanus,5,65 või vanem,64>,
+K4_sugu,1,Mees,Mees,
+K4_sugu,2,Naine,Naine,
+K4_sugu,3,Ei soovi määratleda,Määratlemata,
+K5_elukoht,1,Harju maakond,Harju,
+K5_elukoht,2,Hiiu maakond,Hiiu,
+K5_elukoht,3,Ida-Viru maakond,Ida-Viru,
+K5_elukoht,4,Järva maakond,Järva,
+K5_elukoht,5,Jõgeva maakond,Jõgeva,
+K5_elukoht,6,Lääne maakond,Lääne,
+K5_elukoht,7,Lääne-Viru maakond,Lääne-Viru,
+K5_elukoht,8,Põlva maakond,Põlva,
+K5_elukoht,9,Pärnu maakond,Pärnu,
+K5_elukoht,10,Rapla maakond,Rapla,
+K5_elukoht,11,Saare maakond,Saare,
+K5_elukoht,12,Tartu maakond,Tartu,
+K5_elukoht,13,Valga maakond,Valga,
+K5_elukoht,14,Viljandi maakond,Viljandi,
+K5_elukoht,15,Võru maakond,Võru,
+K5_elukoht,16,Muu,Muu,
+K6_keel,1,Eesti keel,Eesti,
+K6_keel,2,Inglise keel,Inglise,
+K6_keel,3,Vene keel,Vene,
+K6_keel,4,Muu,Muu,
+K7_sorteerimiskaitumine,1,Ei sorteeri,Ei sorteeri,
+K7_sorteerimiskaitumine,2,"Jah, maksimaalselt kahes kategoorias",<3 kategooriat,
+K7_sorteerimiskaitumine,3,"Jah, 3-5 jäätmekategoorias",3-5 kategooriat,
+K7_sorteerimiskaitumine,4,"Jah, üle 6 jäätmekategoorias",5> kategooriat,
+K7_sorteerimiskaitumine,5,"Ei, sest elan täielikult null-kulu eluviisi",Null-kulu eluviis,
+K7_sorteerimiskaitumine,6,Muu,Muu,
+K8_teadmiste_hinnang,1,Väga madal või olematu tarbijateadlikkus,Väga madal,
+K8_teadmiste_hinnang,2,2 - puudu,Pigem madal,
+K8_teadmiste_hinnang,3,3 - puudu,Keskmine,
+K8_teadmiste_hinnang,4,4 - puudu,Pigem hea,
+K8_teadmiste_hinnang,5,Kõik minu valikud on teistele eeskujuks,Väga hea,
+K9_probleemi_tosidus,1,Ei näe seda sugugi probleemina,Probleem puudub,
+K9_probleemi_tosidus,2,2 - puudu,Väike probleem,
+K9_probleemi_tosidus,3,3 - puudu,Keskmine,
+K9_probleemi_tosidus,4,4 - puudu,Pigem tõsine,
+K9_probleemi_tosidus,5,"Äärmiselt suur probleem, millel on tõsised tagajärjed",Väga tõsine,
+K11_teadlikkus,1,Ei ole teadlik,Ei ole teadlik,4
+K11_teadlikkus,2,"Olen teadlik, aga see on valitsuse ja KOV'ide, mitte tarbijate mure",Olen teadlik (ei ole tarbija mure),3
+K11_teadlikkus,3,"Olen kuulnud, kuid täpsemalt ei tea",Olen kuulnud,2
+K11_teadlikkus,4,"Jah, olen teadlik",Olen teadlik,1
+K13_kommunikatsiooni_selgus,1,Puudulik,Puudulik,4
+K13_kommunikatsiooni_selgus,2,Arusaamatu,Arusaamatu,3
+K13_kommunikatsiooni_selgus,3,"Selge, kuid mittetäielik","Selge, kuid mittetäielik",2
+K13_kommunikatsiooni_selgus,4,Väga selge,Väga selge,1
+K14_tekstiilide_kogus,1,Kuni 1kg,<1kg,
+K14_tekstiilide_kogus,2,Kuni 5kg,Kuni 5kg,
+K14_tekstiilide_kogus,3,Kuni 10kg,Kuni 10kg,
+K14_tekstiilide_kogus,4,Kuni 15kg,Kuni 15kg,
+K14_tekstiilide_kogus,5,Üle 15kg,>15kg,
+K14_tekstiilide_kogus,6,Ei oska öelda,Ei oska öelda,
+K14_tekstiilide_kogus,7,Muu,Muu,
+K15_mittevajalikud_tekstiilid,1,Müün teisel ringil (veebis),Müün veebis,
+K15_mittevajalikud_tekstiilid,2,Müün teisel ringil (füüsilises poes),Müün füüsilises poes,
+K15_mittevajalikud_tekstiilid,3,Annan perele või tuttavatele,Annan perele/tuttavatele,
+K15_mittevajalikud_tekstiilid,4,Viin avalikesse kogumiskastidesse,Viin kogumiskastidesse,
+K15_mittevajalikud_tekstiilid,5,Viskan olmejäätmete hulka,Viskan olmejäätmetesse,
+K15_mittevajalikud_tekstiilid,6,Tuunin ja teen ise ümber,Teen ise ümber,
+K15_mittevajalikud_tekstiilid,7,Muu,Muu,
+K17_valmisolek_parandamiseks,1,Ei paranda üldse,,
+K17_valmisolek_parandamiseks,2,2 - puudu,,
+K17_valmisolek_parandamiseks,3,3 - puudu,,
+K17_valmisolek_parandamiseks,4,4 - puudu,,
+K17_valmisolek_parandamiseks,5,Parandan maksimaalselt,,
+K19_loobumise_pohjused,1,Trend/mood on aegunud,Pole moes,
+K19_loobumise_pohjused,2,Katkised või määrdunud,Katkised/määrdunud,
+K19_loobumise_pohjused,3,Kulunud või ilme kaotanud,Kulunud/ilme kaotanud,
+K19_loobumise_pohjused,4,Moraalne väsimus rõivastest (soov värskendada garderoobi),Garderoobiuuendus,
+K19_loobumise_pohjused,5,Vale soetatud suurus,Vale soetatud suurus,
+K19_loobumise_pohjused,6,Kehadimensioonide muutus ajas,Keha ajas muutunud,
+K19_loobumise_pohjused,7,Ruumipuudus kapis/kodus,Ruumipuudus,
+K19_loobumise_pohjused,8,Kolimine,Kolimine,
+K19_loobumise_pohjused,9,Muu,Muu,
+K21_loobumise_lihtsus,1,Tohutult keeruline,Tohutult keeruline,
+K21_loobumise_lihtsus,2,2 - puudu,Pigem keeruline,
+K21_loobumise_lihtsus,3,3 - puudu,Ei keeruline ega lihtne,
+K21_loobumise_lihtsus,4,4 - puudu,Pigem lihtne,
+K21_loobumise_lihtsus,5,Väga lihtne ja mugav,Väga lihtne ja mugav,
+K22_peamised_valjakutsed,1,Ajapuudus,Ajapuudus,
+K22_peamised_valjakutsed,2,Ebakindlus hinnata tekstiilide seisukorda pädevalt,Ebakindlus seisukorra hindamisel,
+K22_peamised_valjakutsed,3,Sobivate kogumiskohtade puudumine mugavas asukohas,Kogumiskohtade puudumine mugavas asukohas,
+K22_peamised_valjakutsed,4,Tekstiilide transport kogumispunktidesse on keeruline,Transport kogumispunkti on keeruline,
+K22_peamised_valjakutsed,5,Moraalne side rõivaste ja tekstiilidega muudab nende kasutuskõlbmatuks nimetamise keeruliseks,Moraalne side rõivaste ja tekstiilidega,
+K22_peamised_valjakutsed,6,Keerukad sorteerimisjuhendid,Keerukad sorteerimisjuhendid,
+K22_peamised_valjakutsed,7,Muu,Muu,
+K23_kasutuskolbmatud_tekstiilid,1,Rõivakonteineritesse,Rõivakonteiner,
+K23_kasutuskolbmatud_tekstiilid,2,Panen segaolmejäätme prügikonteinerisse,Segaolmejäätmete konteiner,
+K23_kasutuskolbmatud_tekstiilid,3,Viin eraldi jäätmejaama,Jäätmejaam,
+K23_kasutuskolbmatud_tekstiilid,4,Põletan kodus,Põletamine (kodus),
+K23_kasutuskolbmatud_tekstiilid,5,Matan,Matmine,
+K23_kasutuskolbmatud_tekstiilid,6,"Ei tea, sest mina ei vastuta selle tegevuse eest enda leibkonnas",Ei tea (kuna ei vastuta),
+K23_kasutuskolbmatud_tekstiilid,7,Muu,Muu,
+K25_loobumisel_oluline,1,Vastuvõtva organisatsiooni läbipaistvus,,
+K25_loobumisel_oluline,2,Rõivastest loobumisel saadav isiklik kasu (nt sooduskupong),,
+K25_loobumisel_oluline,3,Heategevuslik aspekt,,
+K25_loobumisel_oluline,4,Rõivale on tagatud uus elu,,
+K25_loobumisel_oluline,5,Ese läheb re-disainimisele,,
+K25_loobumisel_oluline,6,Mind ei huvita eseme edasine saatus,,
+K25_loobumisel_oluline,7,Muu,,
+K26_korduskasutuseks_sobimatud_tekstiilid,1,Jah,Jah,
+K26_korduskasutuseks_sobimatud_tekstiilid,2,Olen rõiva seisukorras kahelnud ja seetõttu viinud siiski konteinerisse,"Olen rõiva seisukorras kahelnud, seetõttu viinud konteinerisse",
+K26_korduskasutuseks_sobimatud_tekstiilid,3,Ei,Ei,
+K28_riikliku_juhise_selgus,1,Täiesti arusaamatu,Täiesti arusaamatu,5
+K28_riikliku_juhise_selgus,2,Osaliselt arusaamatu,Osaliselt arusaamatu,4
+K28_riikliku_juhise_selgus,3,Osaliselt arusaadav,Osaliselt arusaadav,3
+K28_riikliku_juhise_selgus,4,Täiesti arusaadav,Täiesti arusaadav,2
+K28_riikliku_juhise_selgus,5,Ei ole sellega kursis/ei tea,Ei ole kursis/ei tea,1
+K29_sobiv_kogumisviis,1,Püsivad kogumispunktid linnas,,
+K29_sobiv_kogumisviis,2,Püsivad kogumispunktid kohalikus jäätmejaamas,,
+K29_sobiv_kogumisviis,3,Kogumispunktid kaubanduspindadel,,
+K29_sobiv_kogumisviis,4,"Mobiilsed kogumisautod, mis käivad graafiku alusel ukselt-uksele tekstiile kogumas",,
+K29_sobiv_kogumisviis,5,Kogumisnädalad kodukandis (nt kord kvartalis),,
+K29_sobiv_kogumisviis,6,Muu,,
+K30_valmisolek_kategoriseerimiseks,1,"Jah, see oleks mulle sobiv",,
+K30_valmisolek_kategoriseerimiseks,2,"Jah, kui sorteerimisjuhis on selge ja konkreetne",,
+K30_valmisolek_kategoriseerimiseks,3,"Jah, kui kogumispunktid on mugavas asukohas ja mulle lähedal",,
+K30_valmisolek_kategoriseerimiseks,4,"Ei, eelistaksin üht konteinerit kõigele (one fits for all)",,
+K30_valmisolek_kategoriseerimiseks,5,Pole kindel,,
+K30_valmisolek_kategoriseerimiseks,6,Muu,,
+K32_teabe_allikad,1,Raadio,Raadio,
+K32_teabe_allikad,2,Televisioon,Televisioon,
+K32_teabe_allikad,3,"Ajalehed, ajakirjad","Ajalehed, -kirjad",
+K32_teabe_allikad,4,Artiklid veebiväljaannetes,Veebiväljaanded,
+K32_teabe_allikad,5,Raamatud,Raamatud,
+K32_teabe_allikad,6,Sotsiaalmeedia,Sotsiaalmeedia,
+K32_teabe_allikad,7,Teaduslikud uuringud ja teadusartiklid,"Uuringud, teadusartiklid",
+K32_teabe_allikad,8,"Sõpradelt, tuttavatelt",Sõbrad/tuttavad,
+K32_teabe_allikad,9,"See teema ei ole mind kunagi paelunud, ei huvitu sellest infost teadlikult",Ei huvitu sellest infost,
+K32_teabe_allikad,10,Muu,Muu,
+K33_julgustavad_tegurid,1,Kogumispunktide lähedus elukohale ja ligipääsetavus,,
+K33_julgustavad_tegurid,2,Selged juhised,,
+K33_julgustavad_tegurid,3,Võimalus teha head,,
+K33_julgustavad_tegurid,4,Teave keskkonnamõjude kohta,,
+K33_julgustavad_tegurid,5,Soodustused/allahindlused kauplustes,,
+K33_julgustavad_tegurid,6,Ukselt-uksele kogumine tekstiilitakso meetodil (kokkulepitud ajal tehakse pealekorje),,
+K33_julgustavad_tegurid,7,Muu,,
+K36_valmisolek_lisakysimusteks,1,Jah,,
+K36_valmisolek_lisakysimusteks,2,Ei,,
+K37_rahulolu_garderoobiga,1,Ei ole üldse rahul,Väga rahuolematu,
+K37_rahulolu_garderoobiga,2,2 - puudu,Kergelt rahuolematu,
+K37_rahulolu_garderoobiga,3,3 - puudu,Osaliselt rahul,
+K37_rahulolu_garderoobiga,4,4 - puudu,Üsna rahul,
+K37_rahulolu_garderoobiga,5,Väga rahul,Väga rahul,
+K38_kandmise_kestus,1,"Mu garderoobis on pikaealised riided, mida hooldan ja kannan aastaid",,
+K38_kandmise_kestus,2,"Peamiselt kannan riideid aastaid, aga üksikutest esemetest loobun kiiremini (näiteks erilisemad peoriided või kiiresti kuluvad esemed)",,
+K38_kandmise_kestus,3,"Nii ja naa, mulle meeldib iga aasta oma garderoobi natuke värskendada",,
+K38_kandmise_kestus,4,Käin kaasas hooajaliste moodidega ning garderoob vahetub regulaarselt,,
+K38_kandmise_kestus,5,Muu,,
+K40_ostmissagedus,1,Igapäevaselt,Igapäevaselt,
+K40_ostmissagedus,2,Kord nädalas,Kord nädalas,
+K40_ostmissagedus,3,Kord kuus,Kord kuus,
+K40_ostmissagedus,4,Kord kvartalis,Kord kvartalis,
+K40_ostmissagedus,5,Kord aastas,Kord aastas,
+K40_ostmissagedus,6,Harvem,Harvem,
+K41_ultrakiirmoe_ostmine,1,Ei ole üldse ostnud,Mitte kunagi,
+K41_ultrakiirmoe_ostmine,2,2 - puudu,Harva,
+K41_ultrakiirmoe_ostmine,3,3 - puudu,Mõnikord,
+K41_ultrakiirmoe_ostmine,4,4 - puudu,Sageli,
+K41_ultrakiirmoe_ostmine,5,Ostan valdavalt oma riided neist poodidest,Väga sageli,
+K43_roivaste_tellimine_proovimiseks,1,Ei ole seda kordagi teinud,Mitte kunagi,
+K43_roivaste_tellimine_proovimiseks,2,2 - puudu,Harva,
+K43_roivaste_tellimine_proovimiseks,3,3 - puudu,Mõnikord,
+K43_roivaste_tellimine_proovimiseks,4,4 - puudu,Sageli,
+K43_roivaste_tellimine_proovimiseks,5,Teen seda väga sageli,Väga sageli,

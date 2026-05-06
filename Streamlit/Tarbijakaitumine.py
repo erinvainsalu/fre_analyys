@@ -386,6 +386,14 @@ tab2.dataframe(kolbmatud,
 st.write('Kasutuskülbmatud tekstiilid tuleks viia jäätmejaama. ' \
 'Paljud need, kes on teadlikuse seadusest märkinud kõrgeks, viskavad siiski rõivad olmejäätmetesse või viivad riidekonteinerisse.')
 
+# Segaolmejäätmete konteinerisse viijad vs teadlikkus
+social_proof_receptive = data_puhastatud[
+    (data_puhastatud['K23_kasutuskolbmatud_tekstiilid_2'].isin([1])) &
+    (data_puhastatud['K11_teadlikkus'].isin([1]))
+].shape[0]
+
+st.write(f'Segaolmejäätmete konteinerisse viib kasutuskõlbmatuid tekstiile {social_proof_receptive} teadlikest kasutajatest')
+
 veerud = {
     'K23_kasutuskolbmatud_tekstiilid_1': 'Rõivakonteiner',
     'K23_kasutuskolbmatud_tekstiilid_2': 'Segaolmejäätmete konteiner',
@@ -393,7 +401,7 @@ veerud = {
     'K23_kasutuskolbmatud_tekstiilid_4': 'Põletamine (kodus)',
     'K23_kasutuskolbmatud_tekstiilid_5': 'Matmine',
     'K23_kasutuskolbmatud_tekstiilid_6': 'Ei tea (kuna ei vastuta)',
-    'K23_kasutuskolbmatud_tekstiilid_7': 'Muu',
+    'K23_kasutuskolbmatud_tekstiilid_7': 'Muu'
 }
 
 labelid = leia_sildi_mapping(koodid, 'K11_teadlikkus')
@@ -403,21 +411,35 @@ teabeallikad = (
     .groupby('K11_teadlikkus')
     .sum()
     .rename(columns=veerud)
-    .T
+    .T # transponeeri
 )
 st.dataframe(teabeallikad, column_config=labelid)
-
-teabeallikad_pct = (teabeallikad.div(teabeallikad.sum(axis=1), axis=0) * 100).round(0)
-st.dataframe(teabeallikad_pct, column_config=labelid)
-
-fig, ax = loo_hor_stacked_tulpdiagramm(
-    teabeallikad,
-    '',
-    style
-)
-st.pyplot(fig)
 
 ###################################################
 # SOBIMATUD TEKSTIILID                            #
 ###################################################
 st.write('## Korduskasutuseks sobimatud tekstiilid')
+
+st.write(':red[*To-be-done*]')
+st.write('Uuringus küsiti, kas vastajad on teadlikult viinud tekstiilikonteineritesse rõivaid, mis korduskasutuseks ei sobi.')
+st.write('**Vastajate jaotus teadliku käitumise lõikes**')
+
+tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
+# Leia vastajate arv teadlikkuse alusel
+sobimatu_kaitumine = sagedustabel(data_puhastatud, koodid, 'K26_korduskasutuseks_sobimatud_tekstiilid')
+
+# Kuva tulpdiagramm
+fig, ax = loo_tulpdiagramm(
+    sobimatu_kaitumine,
+    '',
+    style
+)
+tab1.pyplot(fig)
+tab2.dataframe(sobimatu_kaitumine,
+    column_order=('vastus_lyhike', 'vastuste_arv', 'protsent_str'),
+    column_config={
+        'vastus_lyhike': st.column_config.TextColumn('Vastus'),
+        'vastuste_arv': st.column_config.NumberColumn('Vastuste arv', width=20),
+        'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
+    },
+    hide_index=True)
