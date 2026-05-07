@@ -12,6 +12,8 @@ def maara_raporti_stiil():
 
     sns.set_theme(style='whitegrid')
 
+    sns.set_palette(palette='Blues_r')
+
     plt.rcParams.update({
         # font
         #"font.family": "sans-serif",
@@ -149,6 +151,48 @@ def loo_risttabel(df, df_koodid, tunnus_rida, tunnus_veerg, normalize=False):
     return risttabel
 
 # Loo kahe tunnuse risttabel, kus üks tunnustest on mitmikvalikuga
+def loo_mitmikvastuse_risttabel(df_data, df_koodid, tunnus_multiselect, tunnus_single, normalize=False):
+    """
+    Loo risttabel mitmikvastusega ja ühe valikvastusega tunnuse vahel.
+    Tagastab risttabeli, kus read = mitmikvastuse valikud, veerud = ühe valikvastuse kategooriad
+    """
+    
+    # Leia mitmikvastuse veergude arv ja nimed
+    ridade_arv = len(df_koodid[df_koodid['kysimus'] == tunnus_multiselect])
+    multiselect_cols = [f'{tunnus_multiselect}_{i}' for i in range(1, ridade_arv + 1)]
+    
+    # Leia mitmikvastuse vastuste sildid (lühikesed)
+    multiselect_labels = (
+        df_koodid[df_koodid['kysimus'] == tunnus_multiselect]
+        .set_index('kood')['vastus_lyhike']
+        .to_dict()
+    )
+    
+    # Loo veergude mapping
+    veerud_mapping = {
+        f'{tunnus_multiselect}_{kood}': label 
+        for kood, label in multiselect_labels.items()
+    }
+    
+    # Leia ühe valikvastuse kategooriate sildid
+    single_labels = leia_sildi_mapping(df_koodid, tunnus_single)
+    
+    # Grupeeri andmed ja summeeri
+    risttabel = (
+        df_data[[tunnus_single, *multiselect_cols]]
+        .groupby(tunnus_single)
+        .sum()
+        .T  # Transponeeri: read = väljakutsed, veerud = vanuserühmad
+        .rename(index=veerud_mapping)  # Asenda veergude nimed siltidega
+        .rename(columns=single_labels)  # Asenda veergude nimed siltidega
+    )
+    
+    # Vajadusel teisenda protsentideks
+    if normalize:
+        # Arvuta protsendid veergude lõikes (iga vanuserühma sees)
+        risttabel = (risttabel / risttabel.sum(axis=0) * 100).round(1)
+    
+    return risttabel
 
 # Loo vertikaalne tulpdiagramm
 def loo_tulpdiagramm(df, title, style_config, hue=None, percent=True, sort=False):
@@ -276,7 +320,7 @@ def loo_stacked_tulpdiagramm(df, title, style_config, normalize=True):
     df_plot.plot(
         kind='bar',
         stacked=True,
-        color=style_config['PALETTE'],
+        #color=style_config['PALETTE'],
         ax=ax,
         width=0.8
     )
@@ -338,7 +382,7 @@ def loo_stacked_tulpdiagramm(df, title, style_config, normalize=True):
     return fig, ax
 
 # Loo horisontaalne "stacked" tulpdiagramm
-def loo_hor_stacked_tulpdiagramm(df, title, style_config, normalize=True, sort=True):
+def loo_hor_stacked_tulpdiagramm(df, title, style_config, normalize=True, sort=False):
     
     if normalize:
         # Teisenda absoluutarvud protsentideks
@@ -360,7 +404,7 @@ def loo_hor_stacked_tulpdiagramm(df, title, style_config, normalize=True, sort=T
     df_plot.plot(
         kind="barh",
         stacked=True,
-        color=style_config['PALETTE'],
+        #color=style_config['PALETTE'],
         ax=ax
     )
 
@@ -460,3 +504,277 @@ def loo_heatmap(df, title, cmap='coolwarm_r', fmt='.0f'):
     plt.tight_layout()
     
     return fig, ax
+
+def loo_diverging_stacked_tulpdiagramm(df, title, style_config, neutral_col=None, normalize=True, show_labels=True, min_label_pct=5):
+    """
+    Loo diverging stacked bar chart (Likert-skaala jaoks).
+    
+    Negatiivse poolega veerud kuvatakse vasakul, positiivsed paremal,
+    neutraalsed (kui on) jagunevad keskelt pooleks.
+    
+    Parameters:
+    -----------
+    df : DataFrame
+        Risttabel, kus read = kategooriad, veerud = vastusevariandid
+    title : str
+        Graafiku pealkiri
+    style_config : dict
+        Stiili konfiguratsioon (PALETTE, PRIMARY_COLOR)
+    neutral_col : str or int, optional
+        Neutraalse veeru nimi või indeks (nt 'Pole kindel', 2)
+        Kui None, siis eeldatakse, et neutraalne on keskel
+    normalize : bool
+        Kui True, siis kuvatakse protsendid (default: True)
+    show_labels : bool
+        Kui True, kuvatakse protsendid segmentidel (default: True)
+    min_label_pct : float
+        Minimaalne protsent, mille puhul silt kuvatakse (default: 5)
+    
+    Returns:
+    --------
+    tuple
+        (fig, ax) matplotlib objektid
+        
+    Example:
+    --------
+    # Näide Likert-skaalaga: Täiesti ei nõustu | Pigem ei nõustu | Neutraalne | Pigem nõustun | Täiesti nõustun
+    risttabel = loo_risttabel(data, koodid, 'K3_vanus', 'K30_valmisolek', normalize=True)
+    fig, ax = loo_diverging_stacked_tulpdiagramm(
+        df=risttabel,
+        title='Valmisolek sorteerida vanuse järgi',
+        style_config=style_config,
+        neutral_col=2  # Kolmas veerg on neutraalne
+    )
+    """
+    
+    if normalize:
+        df_plot = df.div(df.sum(axis=1), axis=0) * 100
+    else:
+        df_plot = df.copy()
+    
+    n_cols = len(df_plot.columns)
+    
+    # Defineeri, millised veerud on negatiivse/positiivse poolega
+    if neutral_col is not None:
+        # Kui neutraalne veerg on määratud
+        if isinstance(neutral_col, str):
+            neutral_idx = df_plot.columns.get_loc(neutral_col)
+        else:
+            neutral_idx = neutral_col
+        
+        neg_cols = df_plot.columns[:neutral_idx]
+        neutral = df_plot.columns[neutral_idx]
+        pos_cols = df_plot.columns[neutral_idx + 1:]
+    else:
+        # Kui neutraalne veerg puudub, jaga pooleks
+        mid = n_cols // 2
+        neg_cols = df_plot.columns[:mid]
+        pos_cols = df_plot.columns[mid:]
+        neutral = None
+    
+    # Loo joonis
+    fig, ax = create_fig(figsize=(10, len(df_plot) * 0.5 + 2))
+    
+    # Arvuta offset'id diverging effect'i jaoks
+    # Negatiivne pool läheb vasakule (miinus väärtused)
+    df_plot_neg = df_plot[neg_cols].copy()
+    df_plot_neg = -df_plot_neg  # Tee negatiivseks
+    
+    # Positiivne pool läheb paremale
+    df_plot_pos = df_plot[pos_cols].copy() if len(pos_cols) > 0 else pd.DataFrame()
+    
+    y_pos = np.arange(len(df_plot))
+    
+    # Joonista negatiivne pool (vasakule)
+    left_start = df_plot_neg.sum(axis=1).values
+    
+    for i, col in enumerate(reversed(neg_cols)):
+        values = df_plot_neg[col].values
+        bars = ax.barh(
+            y_pos,
+            values,
+            left=left_start - values,
+            color=style_config['PALETTE'][i % len(style_config['PALETTE'])],
+            label=col,
+            height=0.8
+        )
+        
+        # Lisa annotatsioonid
+        if show_labels:
+            for idx, (bar, val) in enumerate(zip(bars, values)):
+                abs_val = abs(val)
+                if abs_val >= min_label_pct:
+                    # Arvuta segmendi keskkoht
+                    x_center = bar.get_x() + bar.get_width() / 2
+                    ax.text(
+                        x_center,
+                        bar.get_y() + bar.get_height() / 2,
+                        f'{abs_val:.0f}%',
+                        ha='center',
+                        va='center',
+                        fontsize=8,
+                        color='white',
+                        weight='bold'
+                    )
+        
+        left_start = left_start - values
+    
+    # Joonista neutraalne (kui on) - jaga pooleks
+    if neutral is not None:
+        neutral_values = df_plot[neutral].values
+        half_neutral = neutral_values / 2
+        
+        # Vasak pool
+        bars_left = ax.barh(
+            y_pos,
+            half_neutral,
+            left=-half_neutral,
+            color='#D3D3D3',  # Hall värv neutraalsele
+            label=neutral,
+            height=0.8,
+            alpha=0.7
+        )
+        
+        # Parem pool
+        bars_right = ax.barh(
+            y_pos,
+            half_neutral,
+            left=0,
+            color='#D3D3D3',
+            height=0.8,
+            alpha=0.7
+        )
+        
+        # Lisa annotatsioonid (ainult ühele poolele, et mitte dubleerida)
+        if show_labels:
+            for idx, (bar, val) in enumerate(zip(bars_right, neutral_values)):
+                if val >= min_label_pct:
+                    # Kuvame terve väärtuse, mitte poolt
+                    ax.text(
+                        0,  # Keskele
+                        bar.get_y() + bar.get_height() / 2,
+                        f'{val:.0f}%',
+                        ha='center',
+                        va='center',
+                        fontsize=8,
+                        color='black',
+                        weight='bold'
+                    )
+        
+        right_start = half_neutral
+    else:
+        right_start = np.zeros(len(df_plot))
+    
+    # Joonista positiivne pool (paremale)
+    for i, col in enumerate(pos_cols):
+        values = df_plot_pos[col].values
+        bars = ax.barh(
+            y_pos,
+            values,
+            left=right_start,
+            color=style_config['PALETTE'][(len(neg_cols) + (1 if neutral else 0) + i) % len(style_config['PALETTE'])],
+            label=col,
+            height=0.8
+        )
+        
+        # Lisa annotatsioonid
+        if show_labels:
+            for idx, (bar, val) in enumerate(zip(bars, values)):
+                if val >= min_label_pct:
+                    x_center = bar.get_x() + bar.get_width() / 2
+                    ax.text(
+                        x_center,
+                        bar.get_y() + bar.get_height() / 2,
+                        f'{val:.0f}%',
+                        ha='center',
+                        va='center',
+                        fontsize=8,
+                        color='white',
+                        weight='bold'
+                    )
+        
+        right_start = right_start + values
+    
+    # Stiil
+    ax.set_title(title, weight='bold', loc='left', pad=15)
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(df_plot.index)
+    ax.set(xlabel=None, ylabel=None)
+    
+    # X-telg
+    if normalize:
+        # Näita protsente
+        max_val = max(abs(df_plot_neg.sum(axis=1).min()), df_plot_pos.sum(axis=1).max() if len(pos_cols) > 0 else 0)
+        if neutral is not None:
+            max_val = max(max_val, (df_plot[neutral] / 2).max())
+        
+        ax.set_xlim(-max_val * 1.1, max_val * 1.1)
+        
+        # Formateeri x-telg protsendina
+        ax.xaxis.set_major_formatter(mtick.FuncFormatter(lambda x, p: f'{abs(x):.0f}%'))
+    
+    # Null-joon
+    ax.axvline(0, color='black', linewidth=0.8, linestyle='-', alpha=0.3)
+    
+    # Grid
+    ax.grid(axis='y', visible=False)
+    ax.grid(axis='x', linestyle='--', alpha=0.4)
+    
+    # Legend
+    # Pööra legend ümber, et negatiivne oleks vasakul
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(
+        handles[::-1],
+        labels[::-1],
+        bbox_to_anchor=(0.5, -0.1),
+        loc='upper center',
+        fontsize=9,
+        ncol=min(4, len(df_plot.columns)),
+        columnspacing=1.2,
+        handletextpad=0.5
+    )
+    
+    plt.tight_layout()
+    
+    return fig, ax
+
+
+# Lihtsustatud versioon 5-punkti Likert-skaalale
+def loo_likert_tulpdiagramm(df, title, style_config, normalize=True, show_labels=True, min_label_pct=5):
+    """
+    Lihtsustatud versioon Likert-skaala jaoks (5 või 7 punkti).
+    Eeldab, et veerud on järjekorras: väga negatiivne → neutraalne → väga positiivne
+    
+    Parameters:
+    -----------
+    df : DataFrame
+        Risttabel veergedega järjekorras (negatiivne → positiivne)
+    title : str
+        Graafiku pealkiri
+    style_config : dict
+        Stiili konfiguratsioon
+    normalize : bool
+        Kui True, kuvatakse protsendid
+    show_labels : bool
+        Kui True, kuvatakse protsendid segmentidel
+    min_label_pct : float
+        Minimaalne protsent annotatsioonide jaoks
+        
+    Returns:
+    --------
+    tuple
+        (fig, ax) matplotlib objektid
+    """
+    
+    n_cols = len(df.columns)
+    neutral_idx = n_cols // 2  # Leia keskmine veerg
+    
+    return loo_diverging_stacked_tulpdiagramm(
+        df=df,
+        title=title,
+        style_config=style_config,
+        neutral_col=neutral_idx,
+        normalize=normalize,
+        show_labels=show_labels,
+        min_label_pct=min_label_pct
+    )

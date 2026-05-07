@@ -14,7 +14,7 @@ sys.path.append(parent_dir)
 # Impordi tabelite ja graafikute joonistamiseks vajalikud funktsioonid
 from Python.visuaalide_abilised import maara_raporti_stiil, leia_sildi_mapping
 from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel
-from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap
+from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap, loo_diverging_stacked_tulpdiagramm
 
 # Määra graafikute stiil
 style = maara_raporti_stiil()
@@ -88,7 +88,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 teadlikkus_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K11_teadlikkus', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     teadlikkus_vanus,
     '',
     style
@@ -110,7 +110,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 teadlikkus_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K11_teadlikkus', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     teadlikkus_elukoht,
     '',
     style
@@ -169,7 +169,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 teadmised_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K8_teadmiste_hinnang', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     teadmised_vanus,
     '',
     style
@@ -178,6 +178,21 @@ tab1.pyplot(fig)
 tab2.dataframe(teadmised_vanus,
     column_config={'K3_vanus': ''}
 )
+
+#n_cols = len(teadmised_vanus.columns)
+#neutral_idx = n_cols // 2  # Leia keskmine veerg
+
+#fig, ax = loo_diverging_stacked_tulpdiagramm(
+#    df=teadmised_vanus,
+#    title='',
+#    style_config=style,
+#    neutral_col=neutral_idx,
+#    normalize=True,
+#    show_labels=True,
+#    min_label_pct=5
+#)
+
+#st.pyplot(fig)
 
 st.write('Vastajatest, kes hindavad oma teadmisi väga heaks, on 64% teadlikud uuest seadusest. ' \
 'Kõigis enesehinnangu gruppides leidub 25-37% neid, kes on seadusest kuulnud, kuid ei ole täpsemalt kursis selle sisuga.')
@@ -268,7 +283,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 probleem_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K9_probleemi_tosidus', normalize=True)
 
 # Loo tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     probleem_vanus,
     '',
     style
@@ -361,7 +376,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 kommunikatsioon_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K13_kommunikatsiooni_selgus', normalize=True)
 
 # Loo tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     kommunikatsioon_elukoht,
     '',
     style
@@ -371,7 +386,7 @@ tab2.dataframe(kommunikatsioon_elukoht,
     column_config={'K5_elukoht': ''}
 )
 
-st.write('Vastustest tuleneb, et vastajatest, kes on hinnanud kommunikatsiooni väga selgeks, on 71% öelnud, et nad on teadlikus 2025. aastal kehtima hakanud nõudest. ' \
+st.write('Vastustest tuleneb, et vastajatest, kes on hinnanud kommunikatsiooni väga selgeks, on 71% öelnud, et nad on teadlikud 2025. aastal kehtima hakanud nõudest. ' \
 'Samas on nende hulgas, kes pidasid kommunikatsiooni väga selgeks, 21% neid vastajaid, kes ei ole uuest nõudest teadlikud. ' \
 'Siiski on suurem hulk neid vastajaid, kes on hinnanud kommunikatsiooni puudulikuks või arusaamatuks ning kes ei ole üldse teadlikud uuest nõudest. ' \
 'Vastajate grupis, kes pidas kommunikatsiooni puudulikuks, on mitteteadlikke 37% ja kommunikatsiooni arusaamatuks pidanud grupis 19%.')
@@ -494,7 +509,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 juhis_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K28_riikliku_juhise_selgus', normalize=True)
 
 # Loo tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     juhis_elukoht,
     '',
     style

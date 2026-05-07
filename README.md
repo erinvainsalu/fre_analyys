@@ -1,27 +1,28 @@
-# Uuringu "Tarbijate hoiakud tekstiilide liigiti kogumisel rõivastest ja kodutekstiilidest loobumisel" vastuste analüüs
+# Uuring "Tarbijate hoiakud tekstiilide liigiti kogumisel rõivastest ja kodutekstiilidest loobumisel"
 
-## Ettevõtte ja uurimisprobleemi tutvustus
-
-### Ettevõte
+## Sissejuhatus
 
 [Fashion Revolution](https://www.fashionrevolution.org/) on rahvusvaheline moeaktivismile suunatud organisatsioon, mis sündis pärast 2013. aastal Bangladeshis aset leidnud tootmishoone Rana Plaza varingut, mille käigus hukkus tuhandeid inimesi. Tol hetkel sai selgeks, et moetööstus peab hakkama kasumi kõrvalt rohkem väärtustama inimesi ja planeeti. Tegemist on ülemaailmse liikumisega, mis ühendab inimesi, kes panevad moetööstuse toimima. Eesti tiim ühines liikumisega mõned aastad hiljem. Fashion Revolution Estonia MTÜ seisab tugevalt puhtama, turvalisema, eetilisema, läbipaistvama ja jätkusuutlikuma moetööstuse eest. Fashion Revolution Estonia põhiline eesmärk on tuua tarbijateni suuremat teadlikkust jätkusuutliku moe tarbimisest, mis aitab teha läbimõeldud otsuseid igapäevaelus.
 
 Tekstiilitakso on ettevõtte JÄÄK OÜ pilootprojekt, mille eesmärk on edendada jätkusuutlikkust ja ringmajandust. Esialgu Saue, Lääne-Nigula ja Hiiumaa vallas ringi sõitev Tekstiilitakso kogub ja töötleb kasutatud tekstiili, ennetades nii selle sattumist jäätmejaamadesse, olles Eestis esimene taoline algatus, mis muudab tekstiili ringluse mugavaks ja kaasaegseks. Kogutud tekstiilid kas suunatakse ringlusesse või väärindatakse. Väärindatakse riided, kus saab augu/pleki kaunistada või ümber disainida. Ülejäänud riided lähevad kangastelgede jaoks ribastamisele või purustatakse kiuks.
 
-### Uurimisprobleem
-
 Uuring "Tarbijate hoiakud tekstiilide liigiti kogumisel rõivastest ja kodutekstiilidest loobumisel" kutsuti ellu Jääk OÜ ehk Auli Uiboupini algatusel. Uuringu peamiseks läbiviijaks oli Fashion Revolution Estonia MTÜ, nõuandvas rollis osales Kerli Kant Hvass (Revaluate OÜ). Kogutud andmeid kasutatakse peaasjalikult Tekstiilitakso pilootprojekti tulemuste mõistmiseks ning üldisemalt tekstiilide kogumise ja ringlusse saatmise paremaks korraldamiseks Eestis.
 
 Uuringu käigus koguti andmeid Google Forms vahendusel 2025. aastal perioodil 10. märts kuni 30. aprill ja uuringus osales kokku 678 vastanut. Küsimustikule vastamine võttis aega 5 - 10 minutit. Kuna sotsiaalmeedia kanalid (nagu nt LinkedIn, Instagram, Facebook), kus uuringut enim jagati, on seotud kestliku rõivatarbimise info levitamisega, siis võib eeldada, et sellest tulenevalt võib vaadelda käesoleva uuringu andmeid ja üldistusi teadliku tarbija seisukohast.
 
-Uuringu eesmärk on mõista milline on tarbijate teadlikkuse tase, praegune käitumine ning väljakutsed ja eelistused tekstiilijäätmete sorteerimilisel enne nende äraandmist. Analüüsi eesmärk on:
-
-- anda soovitusi teavitustegevusteks, kas erisused piirkonnitu, vanuse, soo alusel, mis võiks olla teavituse sisu  - kas hetkel on puudu teadmised, oskused vms,
-- soovitused “poliitika kujundamiseks” - kuidas tarbijate eelistuste alusel luua paremat tekstiilide sorteerimisvõrgustikku.
-
 ***Täienda***
 
 Tekstiilide liigi kogumise nõude kirjeldus ja viited
+
+## Uurimisprobleem
+
+Uuring analüüsib Eesti tarbijate käitumismustreid ja motivatsiooni tekstiiltoodete liigiti kogumisel ning nende tagastamisel pärast kasutusest loobumist. Uuringu eesmärk on koguda andmeid tarbijate käitumise, vajaduste ja takistuste kohta, et toetada kasutatud tekstiilidele tarvis tõhusamate kogumismudelite loomist ning selgemat teavitustegevust.
+
+Uurimisküsimused:
+
+- Milline on tarbijate teadlikkus ning tarbimisharjumused vahetult peale tekstiiljäätmete eraldi kogumise nõude kehtestamist?
+- Kellele suunata teavitustegevust ning mis infot tuleks selle käigus edastada?
+- Kuidas luua tarbijatele sobiv tekstiilide kogumismudel?
 
 ### Küsimustik
 

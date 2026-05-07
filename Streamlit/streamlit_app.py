@@ -5,7 +5,7 @@ main_page = st.Page('uuring.py', title='Uuringust')
 page_2 = st.Page('demograafilised_andmed.py', title='Vastajate demograafilised andmed')
 page_3 = st.Page('tarbijate_teadlikkus.py', title='Tarbijate teadlikkus')
 page_4 = st.Page('tarbijakaitumine.py', title='Tänane tarbijakäitumine')
-page_5 = st.Page('takistused_eelistused.py', title='Takistused ja eelistused')
+page_5 = st.Page('eelistused.py', title='Tarbijate eelistused')
 page_6 = st.Page('kokkuvote.py', title='Kokkuvõte')
 
 # Seadista navigatsioon

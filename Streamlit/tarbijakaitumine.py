@@ -12,7 +12,7 @@ sys.path.append(parent_dir)
 
 # Impordi tabelite ja graafikute joonistamiseks vajalikud funktsioonid
 from Python.visuaalide_abilised import maara_raporti_stiil, leia_sildi_mapping
-from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel
+from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel, loo_mitmikvastuse_risttabel
 from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap
 
 # Määra graafikute stiil
@@ -78,7 +78,7 @@ sorteerimine_puhas = data_puhastatud[data_puhastatud['K7_sorteerimiskaitumine'].
 kaitumine_vanus = loo_risttabel(sorteerimine_puhas, koodid, 'K3_vanus', 'K7_sorteerimiskaitumine', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     kaitumine_vanus,
     '',
     style
@@ -98,7 +98,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 kaitumine_elukoht = loo_risttabel(sorteerimine_puhas, koodid, 'K5_elukoht', 'K7_sorteerimiskaitumine', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     kaitumine_elukoht,
     '',
     style
@@ -234,7 +234,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 kiirmood_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K41_ultrakiirmoe_ostmine', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     kiirmood_vanus,
     '',
     style
@@ -289,7 +289,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 sagedus_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K40_ostmissagedus', normalize=True)
 
 # Kuva tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     sagedus_vanus,
     '',
     style
@@ -305,7 +305,6 @@ tab2.dataframe(sagedus_vanus,
 st.write('## Mittevajalikud tekstiilid')
 st.write('Mida võtad peamiselt ette rõivaste või kodutekstiilidega, mida enam ei vaja?')
 st.write(':red[KES VIIB OLMEPRÜGISSE???]')
-st.write(':red[KAS OLMEJÄÄTMESSE need, kes viivad olmejäätmetesse, ES VIIB OLMEPRÜGISSE???]')
 st.write(':red[*To-be-done*]')
 
 st.write('**Käitumine mittevajalikest tekstiilidest loobumisel**')
@@ -443,3 +442,68 @@ tab2.dataframe(sobimatu_kaitumine,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+
+
+###################################################
+# PEAMISED VÄLJAKUTSED                            #
+###################################################
+st.write('## Peamised väljakutsed')
+
+st.write('**Vastajate jaotus peamiste väljakutsete lõikes**')
+
+tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
+
+# Leia vastajate arv väljakutsete alusel
+valjakutsed = mitmikvastuse_sagedustabel(data_puhastatud, koodid, 'K22_peamised_valjakutsed').sort_values(by='protsent', ascending=False)
+
+fig, ax = loo_hor_tulpdiagramm(
+    valjakutsed,
+    '',
+    style,
+    sort=True   
+)
+tab1.pyplot(fig)
+tab2.dataframe(valjakutsed,
+    column_order=('vastus_lyhike', 'vastuste_arv', 'protsent_str'),
+    column_config={
+        'vastus_lyhike': st.column_config.TextColumn('Vastus'),
+        'vastuste_arv': st.column_config.NumberColumn('Vastuste arv', width=20),
+        'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
+    },
+    hide_index=True)
+
+valjakutsed_kaitumine = loo_mitmikvastuse_risttabel(data_puhastatud, koodid, 'K22_peamised_valjakutsed', 'K7_sorteerimiskaitumine')
+valjakutsed_kaitumine
+
+##################################
+# Uuri vastusevariante
+
+#valjakutsed_veerud = [
+#    col for col in data.columns 
+#    if col.startswith('K22_peamised_valjakutsed_') 
+#    and not col.endswith('_muu_tekst')  # Välista tekstvastustega veerud
+#]
+
+#st.write('Tunnuste koos esinemise sagedus:')
+# Kui sageli mingid valikud koos esinevad?
+#fig, ax = plt.subplots()
+#corr_matrix = data[valjakutsed_veerud].corr()
+# Loo heatmap
+#sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
+#st.pyplot(fig)
+
+# Leia 10 kõige tugevama korrelatsiooniga tunnust
+# Set diagonal to NaN (ignore self-correlation)
+#import numpy as np
+#corr_no_diag = corr_matrix.where(~np.eye(len(corr_matrix), dtype=bool))
+
+# 3. Get top correlations
+#corr_pairs = corr_no_diag.unstack().sort_values(ascending=False)
+#st.write('Tugevaimad korrelatsioonid:')
+#st.write(corr_pairs[corr_pairs < 1.0].head(10))  # Top 10 pairs
+
+# Kui mitu väljakutset iga inimene korraga valis?
+#test = data.copy()
+#kokku = test[valjakutsed_veerud].sum(axis=1)
+#st.write(kokku.value_counts())
+##################################

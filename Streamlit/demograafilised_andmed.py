@@ -144,7 +144,7 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 vanus_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K3_vanus', normalize=True)
 
 # Loo tulpdiagramm
-fig, ax = loo_stacked_tulpdiagramm(
+fig, ax = loo_hor_stacked_tulpdiagramm(
     vanus_elukoht,
     '',
     style
