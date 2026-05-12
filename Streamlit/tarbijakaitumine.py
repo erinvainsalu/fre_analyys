@@ -85,7 +85,7 @@ tab2.dataframe(sorteerimiskaitumine,
     },
     hide_index=True)
 
-plt.savefig('Documentation/sorteerimiskaitumine.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/sorteerimiskaitumine.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('Kuna null-kulu eluviisi harrastab vaid 1 vastanu ja ka "muu" vastajaid oli kõigest 1%, siis järgnevalt neid kahte kategeooriat süviti ei analüüsita.')
@@ -122,7 +122,7 @@ tab2.dataframe(kaitumine_vanus,
     column_config={'K3_vanus': ''}
 )
 
-plt.savefig('Documentation/sorteerimiskaitumine_vanus.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/sorteerimiskaitumine_vanus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Erinevused sorteerimiskäitumises maakondade vaates')
@@ -291,7 +291,7 @@ tab2.dataframe(valjakutsed,
     },
     hide_index=True)
 
-plt.savefig('Documentation/valjakutsed.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/valjakutsed.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Vanuselised erinevused peamiste väljakutsete osas')
@@ -441,7 +441,7 @@ tab2.dataframe(mittevajalikud_tekstiilid,
     },
     hide_index=True)
 
-plt.savefig('Documentation/kasutuskolblikud_tekstiilid.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/kasutuskolblikud_tekstiilid.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 #abitabel = data[data['K15_mittevajalikud_tekstiilid_5'] == 1]
@@ -544,7 +544,7 @@ tab2.dataframe(kolbmatud,
     },
     hide_index=True)
 
-plt.savefig('Documentation/kasutuskolbmatud_tekstiilid.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/kasutuskolbmatud_tekstiilid.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Maakondlikud erinevused kasutuskõlbmatutest tekstiilidest loobumisel')

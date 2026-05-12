@@ -253,7 +253,7 @@ tab2.dataframe(teadlikkus,
     hide_index=True)
 plt.close(fig)
 
-plt.savefig('Documentation/teadlikkus_seadusest.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/teadlikkus_seadusest.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Vanuselised erinevused teadlikkuses')
@@ -356,7 +356,7 @@ tab2.dataframe(teadmised_teadlikkus.reindex(teadmised_teadlikkus.index[::-1]),
     column_config={'K8_teadmiste_hinnang': ''}
 )
 
-plt.savefig('Documentation/teadlikkus_vs_teadmised.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/teadlikkus_vs_teadmised.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 # Teosta hii-ruut test
@@ -452,7 +452,7 @@ tab2.dataframe(kommunikatsiooni_selgus,
     },
     hide_index=True)
 
-plt.savefig('Documentation/kommunikatsiooni_selgus.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/kommunikatsiooni_selgus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Maakondlikud erinevused KOV kommunikatsiooni selguses osas')
@@ -517,7 +517,7 @@ tab2.dataframe(kommunikatsioon_teadlikkus.reindex(kommunikatsioon_teadlikkus.ind
     column_config={'K13_kommunikatsiooni_selgus': ''}
 )
 
-plt.savefig('Documentation/kommunikatsioon_vs_teadlikkus.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/kommunikatsioon_vs_teadlikkus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 # Statistiline analüüs: korrelatsioon teadlikkuse ja enesehinnangu vahel

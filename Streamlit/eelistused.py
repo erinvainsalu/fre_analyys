@@ -167,7 +167,7 @@ tab2.dataframe(kogumisviisid,
     },
     hide_index=True)
 
-plt.savefig('Documentation/kogumisviisi_eelistused.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/kogumisviisi_eelistused.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Vanuselised erinevused eelistustes')
@@ -202,7 +202,7 @@ tab2.dataframe(
     column_config={'K3_vanus': ''}
 )
 
-plt.savefig('Documentation/kogumisviis_vanus.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/kogumisviis_vanus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Sorteerimiskäitumise mõju eelistustele')
@@ -276,7 +276,7 @@ tab2.dataframe(valmisolek,
     },
     hide_index=True)
 
-plt.savefig('Documentation/valmisolek.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/valmisolek.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Sorteerimiskäitumise mõju valmisolekule')
@@ -316,7 +316,7 @@ tab2.dataframe(valmisolek_kaitumine,
     column_config={'K7_sorteerimiskaitumine': ''}
 )
 
-plt.savefig('Documentation/sorteerimine_valmisolek.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/sorteerimine_valmisolek.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
 st.write('### Probleemi tajumise mõju valmisolekule')

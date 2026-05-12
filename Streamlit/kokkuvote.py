@@ -186,6 +186,7 @@ tab2.dataframe(kolbmatud,
 
 #plt.savefig('Documentation/kasutuskolbmatud_tekstiilid.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
+st.caption('Joonisel on värviliselt välja toodud seadusega mittekooskõlas olevad moodused.')
 
 st.write('Uuring toob selgelt esile, et peamised takistused ei ole seotud inimeste motivatsioonipuudusega, vaid süsteemi kasutusmugavuse ja info puudumisega. Suurimateks väljakutseteks peetakse kogumispunktide ebamugavat asukohta, ebaselgeid juhiseid ning teadmatust, mida teha kasutuskõlbmatute tekstiilidega.')
 
@@ -235,3 +236,4 @@ st.write('- Tõsta nooremate vanusegruppide teadlikkust läbi suunatud teavitust
 st.write('- Kommunikeerida senisest oluliselt selgemalt ning praktiliste näidete varal tekstiiljäätmete eraldi sorteerimise ning kogumise nõude sisu ning juhiseid selle rakendamiseks.')
 st.write('- Viia läbi kampaaniaid, mis pakuvad osalejale motiveerivat tasu (nt sooduskupong) rõivaste ja tekstiilide ringlusse saatmisel.')
 st.write('- Kogumissüsteemi loomisel võtta arvesse tarbijate vajadust kodulähedaste ja/või sagedasti külastatavates asukohtades asuvate kogumispunktide järele.')
+st.write('- Teostada kordusuuring, kuhu on kaasatud mitmekesisemate demograafiliste näitajatega tarbijad.')
