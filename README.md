@@ -164,7 +164,7 @@ Käesolev analüüs on koostatud Fashion Revolution Estonia MTÜ loal. Algandmet
 - **Ultrakiirmood** - kiirmoe mudeli äärmuslik vorm, mis kasutab reaalajas trendide jälgimist, digitaalset turundust ja tehisintellektil põhinevat tootmist, et viia rõivad disainist jaemüügini päevade või tundidega. Seda iseloomustavad ülimadalad hinnad, tohutu igapäevane varude käive (tuhanded uued stiilid), sõltuvus ületootmisest ning seda seostatakse tugevalt selliste brändidega nagu Shein ja Temu.
 - **Vastutustundlik tarbimine** - teadlik ja keskkonda arvestav tarbimiskäitumine.
 
-## 5.2. Andmetete ettevalmistus
+## 5.2. Andmete ettevalmistus
 
 Analüüsile eelnevalt loodi Google Sheets’i eraldi tabel küsimustele vastavate numbriliste koodidega, et seda hiljem küsimuste kodeerimiseks kasutada.
 
@@ -339,10 +339,8 @@ Pärast andmete puhastamist ja kodeerimist:
 
 # 6. Analüüs
 
-TBD
+Analüüsi raport on leitav: [FRE uuringu analüüs](https://freuuring.streamlit.app/)
 
 # 7. Kokkuvõte
 
 TBD
-
-Kogu raport on leitav lingilt: 

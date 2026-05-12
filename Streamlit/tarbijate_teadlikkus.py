@@ -9,12 +9,23 @@ import matplotlib.pyplot as plt
 from scipy.stats import chi2_contingency
 
 # Impordi tabelite ja graafikute joonistamiseks vajalikud funktsioonid
-from Python.visuaalide_abilised import maara_raporti_stiil, leia_sildi_mapping
-from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel, loo_mitmikvastuse_risttabel
-from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap, loo_diverging_stacked_tulpdiagramm
+from Python.visuaalide_abilised import maara_raporti_stiil
+from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel
+from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap
 
 # Määra graafikute stiil
 style = maara_raporti_stiil()
+
+app_path = 'https://freuuring.streamlit.app'
+praegune_leht = 'tarbijate_teadlikkus'
+
+# Sidebar linkidega
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#tarbijate_teadlikkus" target="_self">Enesehinnang teadmistele</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#tekstiilijaeaetmete-probleemi-tosiduse-hinnang" target="_self">Probleemi tõsiduse hinnang</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#tekstiilijaeaetmete-probleemi-tosiduse-hinnang" target="_self">Teadlikkus 2025. a. nõudest</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#kov-kommunikatsiooni-selgus" target="_self">KOV kommunikatsiooni selgus</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#eelistatud-teabeallikad" target="_self">Teabeallikate eelistused</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#eelistatud-teabeallikad" target="_self">Hinnang riiklikele juhistele</a>', unsafe_allow_html=True)
 
 # Leia peakaust
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,23 +59,32 @@ st.write('Aastal 2025 jõustunud seadus näeb ette tekstiilijäätmete liigiti k
 ###################################################
 
 st.write('## Hinnang üldistele teadmistele jätkusuutlike valikute tegemisel')
+
 st.write('Tarbijate teadlikkus rõivaste tarbimisega seotud keskkonna ja sotsiaalsetest mõjudest on oluline aspekt nende ostukäitumise ja tekstiilide tarbimisharjumuste kujundamisel. ' \
 'Uuringu kohaselt peab antud teemal enda teadmisi väga madalaks või pigem madalaks 12% vastajatest. Enda teadmisi pigem heaks või väga heaks hindab 52% vastajatest. ' \
 'Tulemuste hindamisel tuleb arvesse võtta, et kuna küsitlust jagati kanalites, mille kaudu tarbivad infot pigem keskmisest teadlikumad tarbijad, ' \
 'siis vastused ei pruugi peegeldada Eesti keskmist inimest.')
+
+st.write('Vastustest võib järeldada, et enamik vastanuid peab end rõivaste ja tekstiilide jätkusuutlikkuse teemadel mõõdukalt teadlikuks. ' \
+'Kuigi pooltel vastajatel on olemas teatud teadmised, mis võimaldavad teha teadlikumaid tarbimisotsuseid, viitab väike väga heade teadmistega vastajate hulk vajadusele süvendada tarbijate arusaama rõivatootmise ja -tarbimise keskkonna- ning sotsiaalsetest mõjudest. ' \
+'See näitab, et tarbijate teadlikkuse tõstmine on jätkuvalt oluline suund jätkusuutlike tarbimisharjumuste kujundamisel.')
 
 st.write('**Vastajate jaotus teadmiste hinnangu lõikes**')
 
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate hinnang oma teadmistele
-teadmiste_hinnang = sagedustabel(data_puhastatud, koodid, 'K8_teadmiste_hinnang')
+teadmiste_hinnang = sagedustabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus='K8_teadmiste_hinnang'
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_tulpdiagramm(
-    teadmiste_hinnang,
-    '',
-    style
+    df=teadmiste_hinnang,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(teadmiste_hinnang,
@@ -75,10 +95,9 @@ tab2.dataframe(teadmiste_hinnang,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+plt.close(fig)
 
-st.write('Vastustest võib järeldada, et enamik vastanuid peab end rõivaste ja tekstiilide jätkusuutlikkuse teemadel mõõdukalt teadlikuks. ' \
-'Kuigi pooltel vastajatel on olemas teatud teadmised, mis võimaldavad teha teadlikumaid tarbimisotsuseid, viitab väike väga heade teadmistega vastajate hulk vajadusele süvendada tarbijate arusaama rõivatootmise ja -tarbimise keskkonna- ning sotsiaalsetest mõjudest. ' \
-'See näitab, et tarbijate teadlikkuse tõstmine on jätkuvalt oluline suund jätkusuutlike tarbimisharjumuste kujundamisel.')
+st.write('### Vanuselised erinevused teadmiste hinnangus')
 
 st.write('Enda teadmiseid on madalamalt hinnanud eelkõige nooremad kasutajagrupid (<18 ja 18-29). Nende seas on vastajaid, kes on oma teadmiseid väga heaks hinnanud, võrreldes teiste vanusepruppidega samuti pisut vähem (6-7%). ' \
 'Samas neid, kes on on teadmiseid väga heaks hinnanud, on vähe ka vanusegruppides 30-49 (10%) ja 64> (8%). ' \
@@ -89,18 +108,25 @@ st.write('**Vastajate teadmiste hinnang vanusegruppide lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Teadmiste hinnang vanuse alusel
-teadmised_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K8_teadmiste_hinnang', normalize=True)
+teadmised_vanus = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K3_vanus', 
+    tunnus_veerg='K8_teadmiste_hinnang', 
+    normalize=True
+)
 
 # Kuva tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    teadmised_vanus,
-    '',
-    style
+    df=teadmised_vanus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(teadmised_vanus,
     column_config={'K3_vanus': ''}
 )
+plt.close(fig)
 
 #n_cols = len(teadmised_vanus.columns)
 #neutral_idx = n_cols // 2  # Leia keskmine veerg
@@ -133,14 +159,18 @@ st.write('**Vastajate jaotus probleemi tõsiduse hinnangu lõikes**')
 
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
-# Leia vastajate hinnang oma teadmistele
-probleemi_hinnang = sagedustabel(data_puhastatud, koodid, 'K9_probleemi_tosidus')
+# Leia vastajate hinnang probleemi tõsidusele
+probleemi_hinnang = sagedustabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus='K9_probleemi_tosidus'
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_tulpdiagramm(
-    probleemi_hinnang,
-    '',
-    style
+    df=probleemi_hinnang,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(probleemi_hinnang,
@@ -151,6 +181,9 @@ tab2.dataframe(probleemi_hinnang,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+plt.close(fig)
+
+st.write('### Vanuselised erinevused probleemi tõsiduse tajumises')
 
 st.write('Enamuses vanusegruppides hinnatakse probleemi tõsiseks või pigem tõsiseks.' \
 'Erandiks on vanusegrupp <18, kelle hulgas on vaid 21% neid, kes hindavad probleemi väga tõsiseks ning sama palju probleemi pigem tõsiseks hindajaid.' \
@@ -162,18 +195,25 @@ st.write('**Probleemi tõsiduse hinnang vanusegruppide lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Probleemi tõsiduse hinnang vanuse alusel
-probleem_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K9_probleemi_tosidus', normalize=True)
+probleem_vanus = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K3_vanus', 
+    tunnus_veerg='K9_probleemi_tosidus', 
+    normalize=True
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    probleem_vanus,
-    '',
-    style
+    df=probleem_vanus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(probleem_vanus,
     column_config={'K3_vanus': ''}
 )
+plt.close(fig)
 
 ###################################################
 # TEADLIKKUS SEADUSEST                            #
@@ -190,14 +230,17 @@ st.write('**Vastajate jaotus teadlikkuse lõikes**')
 
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 # Leia vastajate arv teadlikkuse alusel
-teadlikkus = sagedustabel(data_puhastatud, koodid, 'K11_teadlikkus').sort_values(by='protsent', ascending=False)
+teadlikkus = sagedustabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus='K11_teadlikkus'
+).sort_values(by='protsent', ascending=False)
 
 # Kuva tulpdiagramm
 fig, ax = loo_hor_tulpdiagramm(
-    teadlikkus,
-    '',
-    style,
-    sort=True
+    df=teadlikkus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(teadlikkus,
@@ -208,9 +251,12 @@ tab2.dataframe(teadlikkus,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+plt.close(fig)
 
 plt.savefig('Documentation/teadlikkus_seadusest.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
+
+st.write('### Vanuselised erinevused teadlikkuses')
 
 st.write('Seadusest on kõige teadlikumad vastajad vanuses 30+, kelle seas on seadusest teadlikke 40-46%. ' \
 'Nooremate vastajate seas on seadusest teadlikke 21-30%. Nendes vanusegruppides on võrreldes teistega oluliselt rohkem neid, kes ei ole seadusest üldse teadlikud (41-52%). ' \
@@ -221,18 +267,27 @@ st.write('**Vastajate teadlikkus vanusegruppide lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Teadlikkus vanusegruppide alusel
-teadlikkus_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K11_teadlikkus', normalize=True)
+teadlikkus_vanus = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K3_vanus', 
+    tunnus_veerg='K11_teadlikkus', 
+    normalize=True
+)
 
 # Kuva tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    teadlikkus_vanus,
-    '',
-    style
+    df=teadlikkus_vanus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(teadlikkus_vanus,
     column_config={'K3_vanus': ''}
 )
+plt.close(fig)
+
+st.write('### Maakondlikud erinevused teadlikkuse osas')
 
 st.write('Maakondade lõikes on näha, et teiste maakondadega võrreldes on Pärnumaal oluliselt rohkem vastajaid, kes on uuest seadusest teadlikud (62%). ' \
 'Selles maakonnas on ka seadusest mitteteadlike hulk võrreldes teiste maakondadega pigem väiksem. ' \
@@ -243,18 +298,27 @@ st.write('**Vastajate teadlikkus maakondade lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Teadlikkus elukoha alusel
-teadlikkus_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K11_teadlikkus', normalize=True)
+teadlikkus_elukoht = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K5_elukoht', 
+    tunnus_veerg='K11_teadlikkus', 
+    normalize=True
+)
 
 # Kuva tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    teadlikkus_elukoht,
-    '',
-    style
+    df=teadlikkus_elukoht,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(teadlikkus_elukoht,
     column_config={'K5_elukoht': ''}
 )
+plt.close(fig)
+
+st.write('### Teadmiste hinnangu mõju teadlikkusele')
 
 st.write('Vastajatest, kes hindavad oma teadmisi väga heaks, on 64% teadlikud uuest seadusest. ' \
 'Kõigis enesehinnangu gruppides leidub 25-37% neid, kes on seadusest kuulnud, kuid ei ole täpsemalt kursis selle sisuga.')
@@ -274,16 +338,21 @@ vahetabel['K11_teadlikkus'] = vahetabel['K11_teadlikkus'].replace(2, 4)
 analyys_table = pd.crosstab(vahetabel['K8_teadmiste_hinnang'], vahetabel['K11_teadlikkus'])
 
 # Hinnang enda teadmistele × teadlikkus seadusest
-teadmised_teadlikkus = loo_risttabel(vahetabel, koodid, 'K8_teadmiste_hinnang', 'K11_teadlikkus', normalize=True)
-# Statistiline analüüs: korrelatsioon teadlikkuse ja enesehinnangu vahel
+teadmised_teadlikkus = loo_risttabel(
+    df_data=vahetabel, 
+    df_koodid=koodid, 
+    tunnus_rida='K8_teadmiste_hinnang', 
+    tunnus_veerg='K11_teadlikkus', 
+    normalize=True
+)
 
 # Loo heatmap
 fig, ax = loo_heatmap(
-    teadmised_teadlikkus,
+    df=teadmised_teadlikkus,
     title=''
 )
 tab1.pyplot(fig)
-tab2.dataframe(teadmised_teadlikkus,
+tab2.dataframe(teadmised_teadlikkus.reindex(teadmised_teadlikkus.index[::-1]),
     column_config={'K8_teadmiste_hinnang': ''}
 )
 
@@ -300,6 +369,8 @@ st.write(f'Enesehinnatud teadmiste ja teadlikkuse vahelise seose hindamiseks vii
 'See ei ole juhus, et vastajad, kes on hinnanud oma teadmiseid kõrgemaks olid teadlikumad uues seadusest, samas kui madalama teadmiste hinnanguga vastajad olid sagedamini teadmatud. ' \
 'Ehk on olemas selge seos enesehinnanguliste teadmiste ning seadusest teadlikkuse vahel.')
 
+st.write('### Probleemi tõsiduse taju mõju teadlikkusele')
+
 st.write('Vastajatest, kes tunnetavad, et tekstiilijäätmete probleem Eestis ja globaalses mastaabis on väga tõsine või pigem tõsine, on 36-47% teadlikud kehtima hakanud seadusest. ' \
 'Enamuses probleemi tõsiduse hinnangu gruppides on 22-36% neid, kes kes on seadusest küll kuulnud, kuid ei tea täpsemalt selle sisu.' \
 'Seadusest ei ole teadlikud need vastajad, kes on probleemi tõsidust hinnanud olematuks või väikeseks - esimeses grupis on seadusest mitteteadlikke 67%, teises 78%.')
@@ -311,17 +382,24 @@ tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 analyys_table = pd.crosstab(vahetabel['K9_probleemi_tosidus'], vahetabel['K11_teadlikkus'])
 
 # Hinnang probleemi tõsidusele × teadlikkus seadusest
-probleem_teadlikkus = loo_risttabel(vahetabel, koodid, 'K9_probleemi_tosidus', 'K11_teadlikkus', normalize=True)
+probleem_teadlikkus = loo_risttabel(
+    df_data=vahetabel, 
+    df_koodid=koodid, 
+    tunnus_rida='K9_probleemi_tosidus', 
+    tunnus_veerg='K11_teadlikkus', 
+    normalize=True
+)
 
 # Loo heatmap
 fig, ax = loo_heatmap(
-    probleem_teadlikkus,
+    df=probleem_teadlikkus,
     title=''
 )
 tab1.pyplot(fig)
-tab2.dataframe(probleem_teadlikkus,
+tab2.dataframe(probleem_teadlikkus.reindex(probleem_teadlikkus.index[::-1]),
     column_config={'K9_probleemi_tosidus': ''}
 )
+plt.close(fig)
 
 # Statistiline analüüs: korrelatsioon teadlikkuse ja enesehinnangu vahel
 
@@ -352,13 +430,17 @@ st.write('**Vastajate jaotus kommunikatsiooni selguse lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv kommunikatsiooni selguse alusel
-kommunikatsiooni_selgus = sagedustabel(data_puhastatud, koodid, 'K13_kommunikatsiooni_selgus')
+kommunikatsiooni_selgus = sagedustabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid,
+    tunnus='K13_kommunikatsiooni_selgus'
+)
 
 # Kommunikatsiooni selguse jaotuse tulpdiagramm
 fig, ax = loo_tulpdiagramm(
-    kommunikatsiooni_selgus,
-    '',
-    style
+    df=kommunikatsiooni_selgus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(kommunikatsiooni_selgus,
@@ -373,6 +455,8 @@ tab2.dataframe(kommunikatsiooni_selgus,
 plt.savefig('Documentation/kommunikatsiooni_selgus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
+st.write('### Maakondlikud erinevused KOV kommunikatsiooni selguses osas')
+
 st.write('Kui vaadelda kommunikatsiooni selgust maakondade lõikes, siis kõige selgema kommunikatsiooniga jääb silma Pärnu maakond. ' \
 'Pärnu maakonnas on kokku 33% neid vastajaid, kes on leidnud, et kommunikatsioon on olnud väga selge või selge, kuid mittetäielik. ' \
 'Pärnu maakonnas oli uuringu kohaselt ka kõige rohkem vastajaid, kes olid uuest seadusest teadlikud. ' \
@@ -383,56 +467,53 @@ st.write('**Kommunikatsiooni selgus maakondade lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Kommunikatsiooni selgus elukoha alusel risttabel
-kommunikatsioon_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K13_kommunikatsiooni_selgus', normalize=True)
+kommunikatsioon_elukoht = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K5_elukoht', 
+    tunnus_veerg='K13_kommunikatsiooni_selgus', 
+    normalize=True
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    kommunikatsioon_elukoht,
-    '',
-    style
+    df=kommunikatsioon_elukoht,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(kommunikatsioon_elukoht,
     column_config={'K5_elukoht': ''}
 )
+plt.close(fig)
+
+st.write('### Kommunikatsiooni selguse mõju teadlikkusele')
 
 st.write('Vastustest tuleneb, et vastajatest, kes on hinnanud kommunikatsiooni väga selgeks, on 71% öelnud, et nad on teadlikud 2025. aastal kehtima hakanud nõudest. ' \
 'Samas on nende hulgas, kes pidasid kommunikatsiooni väga selgeks, 21% neid vastajaid, kes ei ole uuest nõudest teadlikud. ' \
 'Siiski on suurem hulk neid vastajaid, kes on hinnanud kommunikatsiooni puudulikuks või arusaamatuks ning kes ei ole üldse teadlikud uuest nõudest. ' \
 'Vastajate grupis, kes pidas kommunikatsiooni puudulikuks, on mitteteadlikke 37% ja kommunikatsiooni arusaamatuks pidanud grupis 19%.')
 
-st.write('**Kommunikatsiooni selgus vanuse lõikes**')
-
-tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
-
-# Kommunikatsiooni selgus elukoha alusel risttabel
-kommunikatsioon_vanus = loo_risttabel(data_puhastatud, koodid, 'K3_vanus', 'K13_kommunikatsiooni_selgus', normalize=True)
-
-# Loo tulpdiagramm
-fig, ax = loo_hor_stacked_tulpdiagramm(
-    kommunikatsioon_vanus,
-    '',
-    style
-)
-tab1.pyplot(fig)
-tab2.dataframe(kommunikatsioon_vanus,
-    column_config={'K3_vanus': ''}
-)
-
 st.write('**Kommunikatsiooni selgus vs teadlikkus uuest seadusest**')
 
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Hinnang kommunikatsioonile × teadlikkus seadusest
-kommunikatsioon_teadlikkus = loo_risttabel(vahetabel, koodid, 'K13_kommunikatsiooni_selgus', 'K11_teadlikkus', normalize=True)
+kommunikatsioon_teadlikkus = loo_risttabel(
+    df_data=vahetabel, 
+    df_koodid=koodid, 
+    tunnus_rida='K13_kommunikatsiooni_selgus', 
+    tunnus_veerg='K11_teadlikkus', 
+    normalize=True
+)
 
 # Loo heatmap
 fig, ax = loo_heatmap(
-    kommunikatsioon_teadlikkus,
+    df=kommunikatsioon_teadlikkus,
     title=''
 )
 tab1.pyplot(fig)
-tab2.dataframe(kommunikatsioon_teadlikkus,
+tab2.dataframe(kommunikatsioon_teadlikkus.reindex(kommunikatsioon_teadlikkus.index[::-1]),
     column_config={'K13_kommunikatsiooni_selgus': ''}
 )
 
@@ -467,13 +548,16 @@ st.write('Kõige sagedamini valitud allikad olid sotsiaalmeedia (73%), veebiväl
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastuste jaotus - teabe allikate eelistused
-teabe_allikad = mitmikvastuse_sagedustabel(data, koodid, 'K32_teabe_allikad').sort_values(by='protsent', ascending=False)
+teabe_allikad = mitmikvastuse_sagedustabel(
+    df_data= data, 
+    df_koodid=koodid, 
+    tunnus='K32_teabe_allikad'
+).sort_values(by='protsent', ascending=False)
 
 fig, ax = loo_hor_tulpdiagramm(
-    teabe_allikad,
-    '',
-    style,
-    sort=True   
+    df=teabe_allikad,
+    title='',
+    style_config=style,  
 )
 tab1.pyplot(fig)
 tab2.dataframe(teabe_allikad,
@@ -484,6 +568,7 @@ tab2.dataframe(teabe_allikad,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+plt.close(fig)
 
 ###################################################
 # RIIKLIKE JUHISTE SELGUS                         #
@@ -499,14 +584,17 @@ st.write('**Vastajate jaotus riiklike juhiste selguse lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv kommunikatsiooni selguse alusel
-juhise_selgus = sagedustabel(data_puhastatud, koodid, 'K28_riikliku_juhise_selgus').sort_values(by='protsent', ascending=False)
+juhise_selgus = sagedustabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus='K28_riikliku_juhise_selgus'
+).sort_values(by='protsent', ascending=False)
 
 # Kommunikatsiooni selguse jaotuse tulpdiagramm
 fig, ax = loo_hor_tulpdiagramm(
-    juhise_selgus,
-    '',
-    style,
-    sort=True
+    df=juhise_selgus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(juhise_selgus,
@@ -517,6 +605,9 @@ tab2.dataframe(juhise_selgus,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+plt.close(fig)
+
+st.write('### Maakondlikud erinevused riiklike juhiste mõistmise osas')
 
 st.write('Kõige rohkem vastajaid, kes ei ole riiklike juhistega kursis, on Tartu maakonnas (57%), millele järgnevad Viljandi (52%) ja Harju (47%). ' \
 'Selguse hinnangutes on kõige enam valitud vahepealset kategooriat „osaliselt arusaadav“. ' \
@@ -530,18 +621,27 @@ st.write('**Riiklike juhiste selgus maakondade lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Kommunikatsiooni selgus elukoha alusel risttabel
-juhis_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K28_riikliku_juhise_selgus', normalize=True)
+juhis_elukoht = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K5_elukoht', 
+    tunnus_veerg='K28_riikliku_juhise_selgus', 
+    normalize=True
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    juhis_elukoht,
-    '',
-    style
+    df=juhis_elukoht,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(juhis_elukoht,
     column_config={'K5_elukoht': ''}
 )
+plt.close(fig)
+
+st.write('### Kommunikatsiooni selguse mõju riiklikest juhistest arusaamisele')
 
 st.write('Kõige rohkem on vastajaid, kes hindavad kommunikatsiooni „puudulikuks“ ning ei ole kursis riiklike juhistega (57%). ' \
 'Nende hulgas on neid, kes on pidanud riiklikke juheiseid täiesti arusaadavaks kõigest 1%. ' \
@@ -560,18 +660,25 @@ st.write('**Kommunikatsiooni selgus vs riiklike juhiste selgus**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Hinnang probleemi tõsidusele × teadlikkus seadusest
-kommunikatsioon_juhis = loo_risttabel(data_puhastatud, koodid, 'K13_kommunikatsiooni_selgus', 'K28_riikliku_juhise_selgus', normalize=True)
+kommunikatsioon_juhis = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K13_kommunikatsiooni_selgus', 
+    tunnus_veerg='K28_riikliku_juhise_selgus', 
+    normalize=True
+)
 # Statistiline analüüs: korrelatsioon teadlikkuse ja enesehinnangu vahel
 
 # Loo heatmap
 fig, ax = loo_heatmap(
-    kommunikatsioon_juhis,
+    df=kommunikatsioon_juhis,
     title=''
 )
 tab1.pyplot(fig)
-tab2.dataframe(kommunikatsioon_juhis,
+tab2.dataframe(kommunikatsioon_juhis.reindex(kommunikatsioon_juhis.index[::-1]),
     column_config={'K13_kommunikatsiooni_selgus': ''}
 )
+plt.close(fig)
 
 # vahetabel = data_puhastatud[data_puhastatud['K28_riikliku_juhise_selgus'] != 5]
 # spearman_corr, p_value = spearmanr(vahetabel['K13_kommunikatsiooni_selgus'], vahetabel['K28_riikliku_juhise_selgus'])

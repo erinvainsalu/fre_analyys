@@ -17,10 +17,10 @@ def maara_raporti_stiil():
 
     plt.rcParams.update({
         # font
-        #"font.family": "sans-serif",
+        'font.family': 'sans-serif',
         'font.size': 10,
         'axes.titlesize': 13,
-        'axes.labelsize': 9,
+        'axes.labelsize': 10,
 
         # telgede stiil
         'axes.spines.top': False,
@@ -213,6 +213,9 @@ def loo_tulpdiagramm(df, title, style_config, hue=None, percent=True, sort=False
     # Eemalda telgede nimed
     ax.set(xlabel=None, ylabel=None)
 
+    ax.tick_params(axis='x', labelsize=10)
+    ax.tick_params(axis='y', labelsize=10)
+
     # Kui diagrammil kuvatud suhtarvud, siis muuda y-telg protsentideks
     if percent:
         ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=0))
@@ -266,6 +269,9 @@ def loo_hor_tulpdiagramm(df, title, style_config, percent=True, sort=False):
     
     # Eemalda telgede nimed
     ax.set(xlabel=None, ylabel=None)
+
+    ax.tick_params(axis='x', labelsize=10)
+    ax.tick_params(axis='y', labelsize=10)
 
     # Kui diagrammil kuvatud suhtarvud, siis muuda x-telg protsentideks
     if percent:
@@ -329,8 +335,9 @@ def loo_stacked_tulpdiagramm(df, title, style_config, normalize=True):
         ax.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=1))
         ax.set_ylim(0, 1)
     
-    # x-telg
-    ax.set_xticklabels(df.index, rotation=0, ha='center')
+    # telgede tekstid
+    ax.set_xticklabels(df.index, rotation=0, ha='center', size=10)
+    ax.tick_params(axis='y', labelsize=10)
 
     # Lisa segmentidele neile vastavad protsendid sildina
     for container in ax.containers:
@@ -415,10 +422,11 @@ def loo_hor_stacked_tulpdiagramm(df, title, style_config, normalize=True, sort=F
         ax.xaxis.set_major_formatter(mtick.PercentFormatter(xmax=1))
         ax.set_xlim(0, 1)
 
-    # y-telg
-    ax.set_yticklabels(df.index)
+    # telgede tekstid
+    ax.set_yticklabels(df.index, size=10)
     if not sort:
         ax.invert_yaxis()
+    ax.tick_params(axis='x', labelsize=10)
 
     # Lisa segmentidele neile vastavad protsendid sildina
     for container in ax.containers:
@@ -489,10 +497,13 @@ def loo_heatmap(df, title, cmap='coolwarm_r', fmt='.0f'):
         #square= True
     )
 
+    ax.invert_yaxis()  # Pööra y-telg ümber
+
     # Lisa pealkiri
     ax.set_title(title, weight='bold', loc='left', pad=15)
 
-    plt.xticks(rotation=45, ha='right', rotation_mode='anchor')
+    plt.xticks(rotation=45, ha='right', rotation_mode='anchor', size=10)
+    plt.yticks(size=10)
     ax.set(xlabel=None)
     ax.set(ylabel=None)
 

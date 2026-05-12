@@ -13,9 +13,9 @@ parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(parent_dir)
 
 # Impordi tabelite ja graafikute joonistamiseks vajalikud funktsioonid
-from Python.visuaalide_abilised import maara_raporti_stiil, leia_sildi_mapping
+from Python.visuaalide_abilised import maara_raporti_stiil
 from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel, loo_mitmikvastuse_risttabel
-from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap
+from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_hor_stacked_tulpdiagramm, loo_heatmap
 
 # Määra graafikute stiil
 style = maara_raporti_stiil()
@@ -24,7 +24,6 @@ app_path = 'http://localhost:8501'
 praegune_leht = 'tarbijakaitumine'
 
 # Sidebar linkidega
-st.sidebar.markdown("### Tänane tarbijakäitumine")
 st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#taenane-sorteerimiskaeitumine" target="_self">Tänane sorteerimiskäitumine</a>', unsafe_allow_html=True)
 st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#peamised-vaeljakutsed-sorteerimisel" target="_self">Peamised väljakutsed</a>', unsafe_allow_html=True)
 st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#loobutud-tekstiilide-kogus-uehes-kalendriaastas" target="_self">Loobutud tekstiilide kogused</a>', unsafe_allow_html=True)
@@ -68,10 +67,10 @@ sorteerimiskaitumine = sagedustabel(
     df_data=data_puhastatud,
     df_koodid=koodid,
     tunnus='K7_sorteerimiskaitumine'
-).sort_values(by='protsent', ascending=False)
+)
 
 # Kuva tulpdiagramm
-fig, ax = loo_hor_tulpdiagramm(
+fig, ax = loo_tulpdiagramm(
     df=sorteerimiskaitumine,
     title='',
     style_config=style
@@ -179,7 +178,7 @@ fig, ax = loo_heatmap(
     title=''
 )
 tab1.pyplot(fig)
-tab2.dataframe(teadmised_sorteerimine,
+tab2.dataframe(teadmised_sorteerimine.reindex(teadmised_sorteerimine.index[::-1]),
     column_config={'K8_teadmiste_hinnang': ''}
 )
 plt.close(fig)
@@ -225,7 +224,7 @@ fig, ax = loo_heatmap(
     title=''
 )
 tab1.pyplot(fig)
-tab2.dataframe(tosidus_sorteerimine,
+tab2.dataframe(tosidus_sorteerimine.reindex(tosidus_sorteerimine.index[::-1]),
     column_config={'K9_probleemi_tosidus': ''}
 )
 plt.close(fig)
@@ -605,8 +604,7 @@ fig, ax = loo_heatmap(
 )
 tab1.pyplot(fig)
 tab2.dataframe(
-    #valjakutsed_kaitumine.style.background_gradient(axis=0, cmap='Blues', low=0, high=1.0).format(precision=0),
-    juhis_kasutuskolbmatu,
+    juhis_kasutuskolbmatu.reindex(juhis_kasutuskolbmatu.index[::-1]),
     column_config={'K28_riikliku_juhise_selgus': ''}
 )
 plt.close(fig)

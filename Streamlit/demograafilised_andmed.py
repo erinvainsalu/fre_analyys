@@ -11,11 +11,20 @@ sys.path.append(parent_dir)
 
 # Impordi tabelite ja graafikute joonistamiseks vajalikud funktsioonid
 from Python.visuaalide_abilised import maara_raporti_stiil
-from Python.visuaalide_abilised import sagedustabel, mitmikvastuse_sagedustabel, loo_risttabel
-from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_stacked_tulpdiagramm, loo_hor_stacked_tulpdiagramm
+from Python.visuaalide_abilised import sagedustabel, loo_risttabel
+from Python.visuaalide_abilised import loo_tulpdiagramm, loo_hor_tulpdiagramm, loo_hor_stacked_tulpdiagramm
 
 # Määra graafikute stiil
 style = maara_raporti_stiil()
+
+app_path = 'https://freuuring.streamlit.app'
+praegune_leht = 'demograafilised_andmed'
+
+# Sidebar linkidega
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#vastajate-vanus" target="_self">Vanus</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#vastajate-sugu" target="_self">Sugu</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#vastajate-peamine-elukoht" target="_self">Peamine elukoht</a>', unsafe_allow_html=True)
+st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#vastajate-peamine-kodune-keel" target="_self">Peamine kodune keel</a>', unsafe_allow_html=True)
 
 # Impordi andmed puhastamise käigus loodud CVS-st
 data = pd.read_csv('data/cleaned_data.csv')
@@ -29,13 +38,18 @@ data_puhastatud['K5_elukoht'] = data['K5_elukoht'].replace([2, 3, 5, 6, 7, 8, 10
 
 st.title('Vastajate demograafilised andmed')
 
+st.write('Ülevaade vastajate demograafilistest andmetest aitab saada paremat ülevaadet erinevate demograafiliste gruppide käitumisest, eelistustest jm. ' \
+'Seetõttu uuriti esmalt vastajate peamisi demograafilisi andmeid.')
+
 ###################################################
 # VANUS                                           #
 ###################################################
 
 st.write('## Vastajate vanus')
+
 st.write('Erinevad vanusegrupid tarbivad rõivaid ja kodutekstiile erinevalt. ' \
 'Samuti erinevad vanusegrupiti ka rõivastest ja tekstiilidest loobumise motiivid. Seetõttu küsiti uuringus vastajate vanusegruppi.')
+
 st.write('668-st vastanust moodustasid enam kui poole ehk 55% 30-49-aastased vastajad. ' \
 'Suurim vastanute hulk vahemikus 30-49 eluaastat on tõenäoliselt tingitud küsimustiku jagamise kanalist, milleks oli suurel määral sotsiaalmeedia erinevad platvormid ja kanalid. ' \
 'Lisaks jagati küsimustikku ka Harjumaa valla paberväljaandes, mis tõi eelduslikult küsimustikule vastajaid vanusest 65 ja vanemad.')
@@ -45,13 +59,17 @@ st.write('**Vastajate jaotus vanusegruppide lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv vanusegrupiti
-vanus_sagedus = sagedustabel(data, koodid, 'K3_vanus')
+vanus_sagedus = sagedustabel(
+    df_data=data, 
+    df_koodid=koodid, 
+    tunnus='K3_vanus'
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_tulpdiagramm(
-    vanus_sagedus,
-    '',
-    style
+    df=vanus_sagedus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(vanus_sagedus,
@@ -63,16 +81,15 @@ tab2.dataframe(vanus_sagedus,
     },
     hide_index=True)
 
-plt.savefig('Documentation/vanuse_jaotus.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/vanuse_jaotus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
-
-st.write('Peamine kiirmoe tarbija globaalses vaates on vanuses 26-35, mistõttu võib eeldada, et see vanusegrupp ostab ja seetõttu ka loobub kõige enam rõivastest ning kodutekstiilidest ja seda ka Eestis.')
 
 ###################################################
 # SUGU                                            #
 ###################################################
 
 st.write('## Vastajate sugu')
+
 st.write('Käesolevale küsimustikule andsid enim vastuseid naised (88%). ' \
 'Mehi vastas küsimustikule 11% ning 1% vastanutest ei soovinud enda sugu avaldada. ' \
 'Vastuste kogumise perioodil prooviti meeste vastuste osakaalu suurendada, kuid tekstiile ja rõivaid puudutavad teemakäsitlused jäävad sageli meestele kaugeks.')
@@ -82,14 +99,17 @@ st.write('**Vastajate jaotus soo lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv soo alusel
-sugu_sagedus = sagedustabel(data, koodid, 'K4_sugu').sort_values(by='protsent', ascending=False)
+sugu_sagedus = sagedustabel(
+    df_data=data, 
+    df_koodid=koodid, 
+    tunnus='K4_sugu'
+).sort_values(by='protsent', ascending=False)
 
 # Loo tulpdiagramm
 fig, ax = loo_tulpdiagramm(
-    sugu_sagedus,
-    '',
-    style,
-    sort=True
+    df=sugu_sagedus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(sugu_sagedus,
@@ -109,24 +129,28 @@ st.write('Kuna vastajate sooline jaotus on tugevalt naiste poole kaldu, siis eda
 ###################################################
 
 st.write('## Vastajate peamine elukoht')
+
 st.write('Uuringus osalesid inimesed üle Eesti, kuid kõige suurem osa vastajatest elab Harjumaal (61%), moodustades selge enamuse. ' \
 'Tartumaalt ja Pärnumaalt oli samuti märkimisväärne hulk vastajaid - vastavalt 13% ja 8%. ' \
 'Lisaks olid esindatud Järvamaa (5%) ning Viljandimaa (3%) elanikud. ' \
-'Ülejäänud maakondades ning välismaal elavate vastajate osakaal on 9%.')
+'Ülejäänud maakondades ning välismaal elavate vastajate osakaal on kokku 9%.')
 
 st.write('**Vastajate jaotus maakonna lõikes**')
 
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv elukoha alusel
-elukoht_sagedus = sagedustabel(data, koodid, 'K5_elukoht').sort_values(by='protsent', ascending=False)
+elukoht_sagedus = sagedustabel(
+    df_data=data,
+    df_koodid=koodid, 
+    tunnus='K5_elukoht'
+).sort_values(by='protsent', ascending=False)
 
 # Loo tulpdiagramm
 fig, ax = loo_hor_tulpdiagramm(
-    elukoht_sagedus,
-    '',
-    style,
-    sort=True
+    df=elukoht_sagedus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(elukoht_sagedus,
@@ -138,38 +162,48 @@ tab2.dataframe(elukoht_sagedus,
     },
     hide_index=True)
 
-plt.savefig('Documentation/elukoha_jaotus.png', dpi=300, bbox_inches='tight', facecolor='white')
+#plt.savefig('Documentation/elukoha_jaotus.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.close(fig)
 
-st.write('Kuna vastajate esindatus enamuses Eesti maakondades on madal, siis edasises analüüsi käigus koondatakse vähese vastajate hulgaga maakonnad vastusevariandi "Muu" alla.')
+st.write('Kuna vastajate esindatus enamuses Eesti maakondades on madal, siis edasise analüüsi käigus koondatakse vähese vastajate hulgaga maakonnad vastusevariandi "Muu" alla.')
+
+st.write('### Vanuselised erinevused maakondade lõikes')
+
+st.write('Vastajate vanuseline jaotus erinevates maakondades on maakondade lõikes sarnane. ' \
+'Kõige enam vastajaid on vanusegrupis 30-49 (48-65%). Järgnevad vastajad vanusegruppides 18-29 ja 50-64. ' \
+'Erandiks on Järvamaa, kus enamus vastajaid on vanusegrupist <18 (74%).')
 
 st.write('**Vastajate vanuseline jaotus maakonna lõikes**')
 
 tab1, tab2 = st.tabs(['Graafik', 'Tabel (% vastanutest)'])
 
 # Vanuseline jaotus elukoha alusel
-vanus_elukoht = loo_risttabel(data_puhastatud, koodid, 'K5_elukoht', 'K3_vanus', normalize=True)
+vanus_elukoht = loo_risttabel(
+    df_data=data_puhastatud, 
+    df_koodid=koodid, 
+    tunnus_rida='K5_elukoht', 
+    tunnus_veerg='K3_vanus', 
+    normalize=True
+)
 
 # Loo tulpdiagramm
 fig, ax = loo_hor_stacked_tulpdiagramm(
-    vanus_elukoht,
-    '',
-    style
+    df=vanus_elukoht,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(vanus_elukoht,
     column_config={'K5_elukoht': ''}
 )
-
-st.write('Vastajate vanuseline jaotus erinevates maakondades on maakondade lõikes sarnane. ' \
-'Kõige enam vastajaid on vanusegrupis 30-49 (48-65%). Järgnevad vastajad vanusegruppides 18-29 ja 50-64. ' \
-'Erandiks on Järvamaa, kus enamus vastajaid on vanusegrupist <17 (74%).')
+plt.close(fig)
 
 ###################################################
 # KEEL                                            #
 ###################################################
 
 st.write('## Vastajate peamine kodune keel')
+
 st.write('Valdav enamus (96%) küsitlusele vastanutest märkis enda koduseks keeleks eesti keele. ' \
 '15 vastanu ehk 2% kodune keel on vene keel. Vähemuses olid vastajad, kelle kodune keel on inglise või mõni muu keel. ' \
 'Kuna küsimustikku oli võimalik täita vaid eesti keeles, siis see selgitab miks suure osa vastajate peamiseks koduseks keeleks on eesti keel.')
@@ -179,13 +213,16 @@ st.write('**Vastajate jaotus koduse keele lõikes**')
 tab1, tab2 = st.tabs(['Graafik', 'Tabel'])
 
 # Leia vastajate arv keele alusel
-keel_sagedus = sagedustabel(data, koodid, 'K6_keel').sort_values(by='protsent', ascending=False)
+keel_sagedus = sagedustabel(
+    df_data=data, 
+    df_koodid=koodid, 
+    tunnus='K6_keel'
+).sort_values(by='protsent', ascending=False)
 
 fig, ax = loo_tulpdiagramm(
-    keel_sagedus,
-    '',
-    style,
-    sort=True
+    df=keel_sagedus,
+    title='',
+    style_config=style
 )
 tab1.pyplot(fig)
 tab2.dataframe(keel_sagedus,
@@ -196,3 +233,4 @@ tab2.dataframe(keel_sagedus,
         'protsent_str': st.column_config.TextColumn('Protsent', alignment='right', width=20)
     },
     hide_index=True)
+plt.close(fig)

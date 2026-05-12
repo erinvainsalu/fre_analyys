@@ -19,7 +19,6 @@ app_path = 'http://localhost:8502'
 praegune_leht = 'eelistused'
 
 # Sidebar linkidega
-st.sidebar.markdown("### Tarbijate eelistused")
 st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#olulised-tegurid-roivastest-loobumisel" target="_self">Loobumisel olulised tegurid</a>', unsafe_allow_html=True)
 st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#eelistatud-kogumisviisid" target="_self">Eelistatud kogumisviisid</a>', unsafe_allow_html=True)
 st.sidebar.markdown(f'<a href="{app_path}/{praegune_leht}#valmisolek-esemete-eraldi-sorteerimiseks" target="_self">Valmisolek sorteerimiseks</a>', unsafe_allow_html=True)
@@ -43,6 +42,9 @@ data_puhastatud = data.copy()
 data_puhastatud['K5_elukoht'] = data['K5_elukoht'].replace([2, 3, 5, 6, 7, 8, 10, 11, 13, 15], 16)
 
 st.title('Tarbijate eelistused')
+
+st.write('Tarbijate eelistused ja valmisolek tekstiilide liigiti kogumiseks annavad ülevaate sellest, millised tegurid mõjutavad inimeste otsuseid rõivastest ja kodutekstiilidest loobumisel ning milliseid lahendusi peetakse kõige mugavamaks ja usaldusväärsemaks. ' \
+'Tekstiilide kogumise ja sorteerimise kontekstis uuriti tarbijate eelistusi eelkõige valmisolekus tekstiile liigiti eraldada, kasutada erinevaid kogumislahendusi ning toetada süsteeme, mis tagavad esemetele võimalikult jätkusuutliku edasise kasutuse.')
 
 ###################################################
 # LOOBUMISEL OLULINE                              #
@@ -117,7 +119,7 @@ fig, ax = loo_heatmap(
 tab1.pyplot(fig)
 tab2.dataframe(
     #valjakutsed_kaitumine.style.background_gradient(axis=0, cmap='Blues', low=0, high=1.0).format(precision=0),
-    tosidus_oluline,
+    tosidus_oluline.reindex(tosidus_oluline.index[::-1]),
     column_config={'K9_probleemi_tosidus': ''}
 )
 plt.close(fig)
