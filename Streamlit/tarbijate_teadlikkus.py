@@ -351,6 +351,7 @@ fig, ax = loo_heatmap(
     df=teadmised_teadlikkus,
     title=''
 )
+
 tab1.pyplot(fig)
 tab2.dataframe(teadmised_teadlikkus.reindex(teadmised_teadlikkus.index[::-1]),
     column_config={'K8_teadmiste_hinnang': ''}
@@ -512,6 +513,7 @@ fig, ax = loo_heatmap(
     df=kommunikatsioon_teadlikkus,
     title=''
 )
+
 tab1.pyplot(fig)
 tab2.dataframe(kommunikatsioon_teadlikkus.reindex(kommunikatsioon_teadlikkus.index[::-1]),
     column_config={'K13_kommunikatsiooni_selgus': ''}

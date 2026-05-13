@@ -339,7 +339,44 @@ Pärast andmete puhastamist ja kodeerimist:
 
 # 6. Analüüs
 
-Analüüsi raport on leitav: [FRE uuringu analüüs](https://freuuring.streamlit.app/)
+Analüüsi täismahus raport on leitav: [FRE uuringu analüüs](https://freuuring.streamlit.app/)
+
+## 6.1. Demograafilised andmed
+
+Ülevaade vastajate demograafilistest andmetest aitab saada paremat ülevaadet erinevate demograafiliste gruppide käitumisest, eelistustest jm. Seetõttu uuriti esmalt vastajate peamisi demograafilisi andmeid.
+
+Käesolevale küsimustikule andsid enim vastuseid naised (88%). Mehi vastas küsimustikule 11% ning 1% vastanutest ei soovinud enda sugu avaldada. Vastuste kogumise perioodil prooviti meeste vastuste osakaalu suurendada, kuid tekstiile ja rõivaid puudutavad teemakäsitlused jäävad sageli meestele kaugeks.
+
+Valdav enamus (96%) küsitlusele vastanutest märkis enda koduseks keeleks eesti keele. 15 vastanu ehk 2% kodune keel on vene keel. Vähemuses olid vastajad, kelle kodune keel on inglise või mõni muu keel. Kuna küsimustikku oli võimalik täita vaid eesti keeles, siis see selgitab miks suure osa vastajate peamiseks koduseks keeleks on eesti keel.
+
+Kuna vastajate jaotus soo ning peamise koduse keele alusel on kallutatud, siis neid tunnuseid edasise analüüsi käigus detailsemalt ei vaadeldud.
+
+### 6.1.1. Vastajate vanus
+Erinevad vanusegrupid tarbivad rõivaid ja kodutekstiile erinevalt. Samuti erinevad vanusegrupiti ka rõivastest ja tekstiilidest loobumise motiivid. Seetõttu küsiti uuringus vastajate vanusegruppi.
+
+668-st vastanust moodustasid enam kui poole ehk 55% 30-49-aastased vastajad. Suurim vastanute hulk vahemikus 30-49 eluaastat on tõenäoliselt tingitud küsimustiku jagamise kanalist, milleks oli suurel määral sotsiaalmeedia erinevad platvormid ja kanalid. Lisaks jagati küsimustikku ka Harjumaa valla paberväljaandes, mis tõi eelduslikult küsimustikule vastajaid vanusest 65 ja vanemad.
+
+**Vastajate jaotus vanusegruppide lõikes**
+
+[Jaotus vanusegruppide lõikes](Documentation/vanuse_jaotus.png "Jaotus vanusegruppide lõikes")
+
+<img alt="jaotus vanusegruppide lõikes" src="Documentation/vanuse_jaotus.png" />
+
+### 6.1.2. Vastajate peamine elukoht
+
+Uuringus osalesid inimesed üle Eesti, kuid kõige suurem osa vastajatest elab Harjumaal (61%), moodustades selge enamuse. Tartumaalt ja Pärnumaalt oli samuti märkimisväärne hulk vastajaid - vastavalt 13% ja 8%. Lisaks olid esindatud Järvamaa (5%) ning Viljandimaa (3%) elanikud. Ülejäänud maakondades ning välismaal elavate vastajate osakaal on kokku 9%.
+
+**Vastajate jaotus maakonna lõikes**
+
+Kuna vastajate esindatus enamuses Eesti maakondades on madal, siis edasise analüüsi käigus koondatakse vähese vastajate hulgaga maakonnad vastusevariandi "Muu" alla.
+
+### 6.1.3. Vanuselised erinevused maakondade lõikes
+
+Vastajate vanuseline jaotus erinevates maakondades on maakondade lõikes sarnane. Kõige enam vastajaid on vanusegrupis 30-49 (48-65%). Järgnevad vastajad vanusegruppides 18-29 ja 50-64. Erandiks on Järvamaa, kus enamus vastajaid on vanusegrupist <18 (74%).
+
+**Vastajate vanuseline jaotus maakonna lõikes**
+
+[This is an alt text.](/image/Markdown-mark.svg "This is a sample image.")
 
 # 7. Kokkuvõte
 
